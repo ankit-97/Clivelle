@@ -128,3 +128,59 @@ footer b{color:#b9b4ff}
 
 /* Website and installed app share the same responsive storefront; only native safe-area spacing differs. */
 .clv-app-mode body{padding-bottom:env(safe-area-inset-bottom)}
+
+
+/* Clivelle visual merchandising: image-led homepage matching the supplied design reference */
+.hero.fashion-hero{height:auto;min-height:480px;grid-template-columns:minmax(250px,.9fr) minmax(320px,1.28fr) minmax(190px,.58fr);gap:12px;padding:14px 2.5%;background:#fff}
+.hero-copy{border-radius:20px;padding:38px 8%;background:linear-gradient(135deg,#ffe7f1,#f2eaff)}
+.hero-image{min-height:450px;height:auto;border-radius:20px;background:#ffeaf2}
+.hero-image:before{inset:0;background:url('./hero-editorial.svg') center/cover no-repeat}
+.hero-promos{display:grid;grid-template-rows:repeat(3,minmax(0,1fr));gap:12px;min-height:450px}
+.hero-promo{display:flex;align-items:center;justify-content:space-between;gap:8px;overflow:hidden;min-width:0;padding:12px;border-radius:18px;background:linear-gradient(120deg,#fff0f6,#f1eaff);color:#111936}
+.hero-promo span{display:flex;flex-direction:column;align-items:flex-start;gap:5px;min-width:0}
+.hero-promo b{font-size:clamp(12px,1.15vw,17px);line-height:1.2}
+.hero-promo small{font-size:9px;color:#69718b}
+.hero-promo em{font-style:normal;background:#111936;color:#fff;border-radius:999px;padding:7px 12px;font-size:9px;margin-top:3px}
+.hero-promo img{width:44%;height:100%;max-height:130px;object-fit:contain;mix-blend-mode:multiply;border-radius:12px}
+.promo-bundle{background:linear-gradient(120deg,#fff8ed,#ffe4ef)}
+.promo-gift{background:linear-gradient(120deg,#f5edff,#fff0f6)}
+.category-ribbon{grid-template-columns:repeat(4,minmax(0,1fr));padding:24px 3%;gap:12px}
+.category-ribbon a{position:relative;grid-template-columns:78px 1fr;grid-template-rows:auto auto;min-height:96px;padding:9px}
+.category-photo{grid-row:1/3;width:78px;height:78px;object-fit:cover;border-radius:13px;background:#fff0f6}
+.category-ribbon .category-icon{display:none}
+.category-ribbon b{font-size:12px}
+.category-ribbon small{font-size:9px}
+.trust-strip{background:#fff;color:#313b67;border-bottom:1px solid #f1e8f2}
+.collection.section-wrap{padding-top:56px}
+.product-grid{grid-template-columns:repeat(4,minmax(0,1fr));gap:20px 14px}
+.product-photo{aspect-ratio:.9;border-radius:16px}
+.product-photo img{object-fit:cover}
+.product-info{padding:10px;gap:6px}
+.product-name{font:600 12px/1.4 'Poppins',sans-serif}
+.product-price{font-weight:700}
+.clv-feature-hub{padding-top:48px}
+.feature-tile{position:relative;overflow:hidden}
+.feature-quiz{background:linear-gradient(135deg,#fff0f6,#f0e9ff)}
+.feature-bundle{background:linear-gradient(135deg,#fff7ed,#ffe8f0)}
+.feature-colours{background:linear-gradient(135deg,#eff8ff,#f6efff)}
+.feature-gift{background:linear-gradient(135deg,#fff0e7,#fff8f4)}
+.feature-rewards{background:linear-gradient(135deg,#f1eaff,#fff0f6)}
+.feature-community{background:linear-gradient(135deg,#effaf8,#f2f4ff)}
+@media(max-width:1000px){.hero.fashion-hero{grid-template-columns:1fr 1.1fr;}.hero-promos{grid-column:1/-1;grid-template-columns:repeat(3,minmax(0,1fr));grid-template-rows:140px;min-height:0}.hero-promo img{width:38%}.hero-image{min-height:360px}}
+@media(max-width:700px){
+ .hero.fashion-hero{display:flex;flex-direction:column-reverse;gap:10px;padding:10px 4%}
+ .hero-copy{width:100%;padding:25px 22px;border-radius:17px}
+ .hero-image{width:100%;height:70vw;min-height:260px;max-height:390px}
+ .hero-promos{width:100%;grid-template-columns:repeat(2,minmax(0,1fr));grid-template-rows:120px 120px;gap:9px}
+ .hero-promo{padding:8px;border-radius:14px}.hero-promo b{font-size:11px}.hero-promo small{font-size:8px}.hero-promo em{font-size:8px;padding:6px 9px}
+ .hero-promo:last-child{grid-column:1/-1}
+ .category-ribbon{grid-template-columns:repeat(2,minmax(0,1fr));padding:14px 4%;gap:9px}
+ .category-ribbon a{grid-template-columns:58px 1fr;min-height:74px;padding:7px}
+ .category-photo{width:58px;height:58px}
+ .category-ribbon b{font-size:10px}.category-ribbon small{font-size:8px}
+ .product-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+ .product-info{padding:9px}
+ .clv-feature-hub{padding-top:34px}
+ .feature-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:430px){.hero-promos{grid-template-rows:110px 110px}.hero-promo:last-child{grid-column:1/-1}.feature-grid{grid-template-columns:1fr}}
