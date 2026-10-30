@@ -1,4 +1,8 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-  <rect width="512" height="512" rx="112" fill="#f7f1ed"/>
-  <text x="256" y="350" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="340" fill="#2a2320">C</text>
+<defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#ffc33e"/><stop offset=".34" stop-color="#ff398b"/><stop offset=".68" stop-color="#7b32f2"/><stop offset="1" stop-color="#00b7f0"/></linearGradient></defs>
+<rect width="512" height="512" rx="112" fill="#fff9f8"/>
+<path d="M180 183v-43c0-48 35-78 76-78s76 30 76 78v43" fill="none" stroke="url(#g)" stroke-width="28" stroke-linecap="round"/>
+<path d="M104 175h304l30 260H74z" fill="url(#g)"/>
+<path d="M258 213c-67 0-112 43-112 105s45 105 112 105c39 0 70-16 91-46l-58-41c-8 12-18 18-32 18-23 0-38-15-38-36s15-36 38-36c14 0 24 6 32 18l58-41c-21-30-52-46-91-46z" fill="#fff"/>
+<path d="M399 127l15 32 32 15-32 15-15 32-15-32-32-15 32-15z" fill="#ff4b98"/>
 </svg>
