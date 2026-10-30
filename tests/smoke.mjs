@@ -11,6 +11,9 @@ try {
   await page.waitForFunction(async () => { const reg = await navigator.serviceWorker?.getRegistration(); return !!reg?.active && reg.active.state === 'activated'; }, { timeout: 15000 });
   assert.match(await page.title(), /CLIVELLE/i);
   assert.ok(await page.locator('.product-card').count() >= 8, 'catalogue renders');
+  assert.equal(await page.locator('.hero-promos .hero-promo').count(), 3, 'homepage features three image-led promo cards');
+  assert.equal(await page.locator('.category-photo').count(), 4, 'category tiles include product photography');
+  assert.ok(await page.locator('.product-card img').evaluateAll(imgs => imgs.every(img => img.complete && img.naturalWidth > 0)), 'all catalogue product images load');
   assert.ok(await page.locator('.site-header .brand-logo').isVisible(), 'website brand logo renders');
   assert.ok(await page.locator('.announcement').isVisible(), 'website storefront header remains visible');
   assert.ok(await page.locator('.main-nav').isVisible(), 'website desktop navigation remains visible');
@@ -109,13 +112,18 @@ try {
   appPage.on('pageerror', e => errors.push(e.message));
   await appPage.goto('http://127.0.0.1:4173/', { waitUntil: 'networkidle' });
   assert.ok(await appPage.locator('html.clv-app-mode').count(), 'installed app mode detected');
-  assert.ok(await appPage.locator('.site-header').isVisible(), 'installed app has a compact app header');
-  assert.equal(await appPage.locator('.main-nav').isVisible().catch(() => false), false, 'installed app hides website navigation');
-  assert.equal(await appPage.locator('.story-band').isVisible().catch(() => false), false, 'installed app hides editorial website story section');
-  assert.equal(await appPage.locator('footer').isVisible().catch(() => false), false, 'installed app hides website footer');
-  assert.equal(await appPage.locator('.announcement').isVisible().catch(() => false), false, 'app hides website announcement bar');
-  assert.equal(await appPage.locator('.mobile-tabbar').evaluate(el => getComputedStyle(el).position), 'fixed', 'app has fixed native-style bottom navigation');
-  assert.equal(await appPage.locator('.product-grid').evaluate(el => getComputedStyle(el).gridTemplateColumns.split(' ').length), 2, 'app uses two-column shopping cards');
+  assert.ok(await appPage.locator('.site-header').isVisible(), 'installed app storefront header renders');
+  assert.equal(await appPage.locator('.hero-promos .hero-promo').count(), 3, 'installed app shares the same image-led homepage');
+  assert.equal(await appPage.locator('.category-photo').count(), 4, 'installed app shares product category images');
+  assert.ok(await appPage.locator('.product-card img').evaluateAll(imgs => imgs.every(img => img.complete && img.naturalWidth > 0)), 'installed app loads every product image');
+  assert.equal(await appPage.locator('.mobile-tabbar').evaluate(el => getComputedStyle(el).position), 'fixed', 'mobile app has fixed bottom navigation');
+  const appLayout = await appPage.locator('.hero, .category-ribbon, .product-grid, .feature-grid').evaluateAll(els => els.map(el => ({display:getComputedStyle(el).display,columns:getComputedStyle(el).gridTemplateColumns,flexDirection:getComputedStyle(el).flexDirection})));
+  const mobileContext = await browser.newContext({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true });
+  const mobilePage = await mobileContext.newPage();
+  await mobilePage.goto('http://127.0.0.1:4173/', { waitUntil: 'networkidle' });
+  const websiteLayout = await mobilePage.locator('.hero, .category-ribbon, .product-grid, .feature-grid').evaluateAll(els => els.map(el => ({display:getComputedStyle(el).display,columns:getComputedStyle(el).gridTemplateColumns,flexDirection:getComputedStyle(el).flexDirection})));
+  assert.deepEqual(appLayout, websiteLayout, 'website and installed app use the same responsive storefront layout');
+  await mobileContext.close();
   const icon = await appPage.request.get('http://127.0.0.1:4173/clivelle-home-icon-v9.png?rev=10');
   assert.equal(icon.status(), 200, 'unique iOS home-screen icon is served');
   assert.match(icon.headers()['content-type'] || '', /image\/png/i, 'home-screen icon is a PNG');
@@ -142,7 +150,7 @@ try {
   assert.equal(liveIcon.status(), 200, 'published unique home-screen icon responds');
   assert.ok((liveIcon.headers()['content-type'] || '').includes('image/png'), 'published home-screen icon has PNG content type');
   await liveContext.close();
-  console.log('CLIVELLE SMOKE TESTS PASSED: website navigation, search/empty state, product detail, finder, colour filter, bundle discount, sign-in, bag quantities, gift options, reviews, checkout, rewards, installed-app layout and cache-busted PNG icon.');
+  console.log('CLIVELLE SMOKE TESTS PASSED: website/app shared responsive layout, image-led promotions, category/product photography, search, product detail, finder, colour filter, bundles, sign-in, bag quantities, gift options, reviews, checkout, rewards and cache-busted PNG icon.');
 } finally {
   await browser.close();
 }
