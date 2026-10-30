@@ -1,15 +1,15 @@
 {
   "id": "./",
-  "name": "Clivelle — Shop Smart, Live Stylish",
+  "name": "Clivelle — Hair Accessories",
   "short_name": "Clivelle",
-  "description": "Colourful little finishing touches for every kind of day.",
+  "description": "Colourful claw clips, hairbands, hair clips and scrunchies.",
   "lang": "en-IN",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
   "orientation": "portrait",
   "background_color": "#fff9f8",
-  "theme_color": "#ff398b",
+  "theme_color": "#ff4d8d",
   "categories": [
     "shopping",
     "lifestyle"
