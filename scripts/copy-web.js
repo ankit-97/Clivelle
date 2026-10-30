@@ -11,6 +11,7 @@ const files = [
   'service-worker.js',
   'pwa.js',
   'clivelle-icon.svg',
+  'clivelle-home-icon-v9.png',
   'clivelle-logo.svg',
   'hero-editorial.svg',
   'story-editorial.svg',
