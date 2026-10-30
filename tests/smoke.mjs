@@ -23,7 +23,14 @@ try {
   await page.locator('.category-ribbon a[data-filter="Claw clips"]').click();
   assert.ok(await page.locator('.product-card').count() >= 1, 'category shortcuts filter the product catalogue');
   await page.locator('#filterRow [data-filter="All"]').click();
-  assert.ok(await page.locator('.product-card img').evaluateAll(imgs => imgs.every(img => img.complete && img.naturalWidth > 0)), 'all catalogue product images load');
+  assert.equal(await page.locator('.product-card .clv-photo-crop').count(), 8, 'all eight catalogue products have photo crops');
+  const photoAtlas = await page.request.get('http://127.0.0.1:4173/clivelle-photo-grid.jpg');
+  assert.equal(photoAtlas.status(), 200, 'catalogue product photo atlas is served');
+  assert.match(photoAtlas.headers()['content-type'] || '', /image\/jpeg/i, 'catalogue photo atlas is a JPEG');
+  const heroPhoto = await page.request.get('http://127.0.0.1:4173/clivelle-hero-launch.jpg');
+  assert.equal(heroPhoto.status(), 200, 'hero editorial photo is served');
+  assert.match(heroPhoto.headers()['content-type'] || '', /image\/jpeg/i, 'hero photo is a JPEG');
+  assert.match(await page.locator('.hero-image').evaluate(el => getComputedStyle(el).backgroundImage), /clivelle-hero-launch\.jpg/, 'hero displays the photographic launch image');
   assert.ok(await page.locator('.site-header .brand-logo').isVisible(), 'website brand logo renders');
   assert.ok(await page.locator('.announcement').isVisible(), 'website storefront header remains visible');
   assert.ok(await page.locator('.main-nav').isVisible(), 'website desktop navigation remains visible');
@@ -33,7 +40,7 @@ try {
   await page.locator('#searchInput').fill('');
 
   // Product search and product detail
-  await page.locator('#searchInput').fill('Rosewood');
+  await page.locator('#searchInput').fill('Butterfly');
   assert.equal(await page.locator('.product-card').count(), 1, 'product search filters catalogue');
   await page.locator('#searchInput').fill('');
   await page.locator('.product-name').first().click();
@@ -63,7 +70,7 @@ try {
   await page.locator('#acceptTerms').check();
   await page.locator('#authForm button').click();
   assert.equal(await page.locator('#bagDrawer.open').count(), 1, 'bundle opens bag after sign-in');
-  assert.match(await page.locator('#bagSubtotal').innerText(), /430/, '10 percent bundle saving reaches bag total');
+  assert.match(await page.locator('#bagSubtotal').innerText(), /538/, '10 percent bundle saving reaches bag total');
   await page.locator('.bag-row').first().locator('[data-delta="1"]').click();
   assert.equal(await page.locator('#bagCount').innerText(), '3', 'bag quantity increase updates count');
   await page.locator('.bag-row').first().locator('[data-delta="-1"]').click();
@@ -130,7 +137,10 @@ try {
   assert.equal(await appPage.locator('.category-photo').count(), 6, 'installed app shares all six category images');
   assert.equal(await appPage.locator('.feature-banners .feature-banner').count(), 3, 'installed app shares image-led feature banners');
   assert.ok(await appPage.locator('#searchBox #searchInput').isVisible(), 'installed app has a visible header search');
-  assert.ok(await appPage.locator('.product-card img').evaluateAll(imgs => imgs.every(img => img.complete && img.naturalWidth > 0)), 'installed app loads every product image');
+  assert.equal(await appPage.locator('.product-card .clv-photo-crop').count(), 8, 'installed app uses photo crops for all products');
+  const appAtlas = await appPage.request.get('http://127.0.0.1:4173/clivelle-photo-grid.jpg');
+  assert.equal(appAtlas.status(), 200, 'installed app packages the same photo atlas');
+  assert.match(await appPage.locator('.hero-image').evaluate(el => getComputedStyle(el).backgroundImage), /clivelle-hero-launch\.jpg/, 'installed app displays the same hero photo');
   assert.equal(await appPage.locator('.mobile-tabbar').evaluate(el => getComputedStyle(el).position), 'fixed', 'mobile app has fixed bottom navigation');
   const appLayout = await appPage.locator('.hero, .category-ribbon, .product-grid, .feature-grid').evaluateAll(els => els.map(el => ({display:getComputedStyle(el).display,columns:getComputedStyle(el).gridTemplateColumns,flexDirection:getComputedStyle(el).flexDirection})));
   const mobileContext = await browser.newContext({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true });
@@ -139,6 +149,9 @@ try {
   const websiteLayout = await mobilePage.locator('.hero, .category-ribbon, .product-grid, .feature-grid').evaluateAll(els => els.map(el => ({display:getComputedStyle(el).display,columns:getComputedStyle(el).gridTemplateColumns,flexDirection:getComputedStyle(el).flexDirection})));
   assert.deepEqual(appLayout, websiteLayout, 'website and installed app use the same responsive storefront layout');
   await mobileContext.close();
+  const promoRects = await appPage.locator('.hero-promos .hero-promo').evaluateAll(els => els.map(el => { const r=el.getBoundingClientRect(); return {x:r.x,y:r.y,width:r.width}; }));
+  assert.ok(promoRects.every(r => Math.abs(r.y-promoRects[0].y)<2), 'all three mobile promo cards sit on one row');
+  assert.ok(promoRects[0].x < promoRects[1].x && promoRects[1].x < promoRects[2].x, 'mobile promo cards follow the reference order');
   const icon = await appPage.request.get('http://127.0.0.1:4173/clivelle-home-icon-v9.png?rev=10');
   assert.equal(icon.status(), 200, 'unique iOS home-screen icon is served');
   assert.match(icon.headers()['content-type'] || '', /image\/png/i, 'home-screen icon is a PNG');
@@ -157,6 +170,10 @@ try {
   }
   assert.equal(liveHome.status(), 200, 'published website responds');
   assert.ok(liveHtml.includes('clivelle-home-icon-v9.png?rev=10'), 'published page references the cache-busted iOS icon URL');
+  const liveAtlas = await livePage.request.get('https://ankit-97.github.io/Clivelle/clivelle-photo-grid.jpg');
+  assert.equal(liveAtlas.status(), 200, 'published catalogue photo atlas responds');
+  const liveHeroPhoto = await livePage.request.get('https://ankit-97.github.io/Clivelle/clivelle-hero-launch.jpg');
+  assert.equal(liveHeroPhoto.status(), 200, 'published hero photo responds');
   const liveManifestResponse = await livePage.request.get('https://ankit-97.github.io/Clivelle/manifest.webmanifest');
   assert.equal(liveManifestResponse.status(), 200, 'published web manifest responds');
   const liveManifest = await liveManifestResponse.json();
