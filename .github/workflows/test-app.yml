@@ -1,0 +1,31 @@
+name: CLIVELLE browser smoke tests
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'app.js'
+      - 'index.html'
+      - 'styles.css'
+      - 'manifest.webmanifest'
+      - 'service-worker.js'
+      - 'tests/**'
+      - '.github/workflows/test-app.yml'
+  workflow_dispatch:
+jobs:
+  browser-smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Install browser test runtime
+        run: |
+          npm install --no-save playwright
+          npx playwright install --with-deps chromium
+      - name: Start local storefront
+        run: |
+          python3 -m http.server 4173 --bind 127.0.0.1 > /tmp/clivelle-http.log 2>&1 &
+          for i in $(seq 1 20); do curl -fsS http://127.0.0.1:4173/ >/dev/null && break || sleep 1; done
+      - name: Test website and installed-app interactions
+        run: node tests/smoke.mjs
