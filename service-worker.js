@@ -8,7 +8,6 @@ const APP_SHELL = [
   "pwa.js",
   "manifest.webmanifest",
   "clivelle-icon.svg",
-  "apple-touch-icon.png",
   "clivelle-home-icon-v9.png",
   "clivelle-logo.svg",
   "hero-editorial.svg",
