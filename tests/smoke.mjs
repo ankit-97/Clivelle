@@ -10,7 +10,8 @@ try {
   await page.goto('http://127.0.0.1:4173/', { waitUntil: 'networkidle' });
   await page.waitForFunction(async () => { const reg = await navigator.serviceWorker?.getRegistration(); return !!reg?.active && reg.active.state === 'activated'; }, { timeout: 15000 });
   assert.match(await page.title(), /CLIVELLE/i);
-  assert.ok(await page.locator('.product-card').count() >= 8, 'catalogue renders');
+  await page.waitForTimeout(100);
+  assert.ok(await page.locator('.product-card').count() >= 8, 'catalogue renders; page errors: '+errors.join(' | ')+'; product grid HTML: '+(await page.locator('#productGrid').innerHTML()));
   assert.equal(await page.locator('.hero-promos .hero-promo').count(), 3, 'homepage features three image-led promo cards');
   assert.equal(await page.locator('.category-photo').count(), 6, 'six category tiles include product photography');
   assert.equal(await page.locator('.feature-banners .feature-banner').count(), 3, 'homepage has three image-led feature banners');
