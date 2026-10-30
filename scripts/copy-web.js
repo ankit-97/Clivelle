@@ -13,6 +13,8 @@ const files = [
   'clivelle-icon.svg',
   'clivelle-home-icon-v9.png',
   'clivelle-logo.svg',
+  'clivelle-photo-grid.jpg',
+  'clivelle-hero-launch.jpg',
   'hero-editorial.svg',
   'story-editorial.svg',
   'cloud-scrunchie.svg',
