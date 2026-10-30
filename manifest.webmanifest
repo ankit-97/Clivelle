@@ -1,16 +1,19 @@
 {
   "id": "./",
-  "name": "Clivelle — Style Every Strand",
+  "name": "Clivelle — Shop Smart, Live Stylish",
   "short_name": "Clivelle",
-  "description": "Thoughtfully made hair accessories to style every strand.",
+  "description": "Colourful little finishing touches for every kind of day.",
   "lang": "en-IN",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
   "orientation": "portrait",
-  "background_color": "#f7f1ed",
-  "theme_color": "#f7f1ed",
-  "categories": ["shopping", "lifestyle"],
+  "background_color": "#fff9f8",
+  "theme_color": "#ff398b",
+  "categories": [
+    "shopping",
+    "lifestyle"
+  ],
   "icons": [
     {
       "src": "./clivelle-icon.svg",
