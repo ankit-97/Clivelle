@@ -1,8 +1,14 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-<defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#ffc33e"/><stop offset=".34" stop-color="#ff398b"/><stop offset=".68" stop-color="#7b32f2"/><stop offset="1" stop-color="#00b7f0"/></linearGradient></defs>
-<rect width="512" height="512" rx="112" fill="#fff9f8"/>
-<path d="M180 183v-43c0-48 35-78 76-78s76 30 76 78v43" fill="none" stroke="url(#g)" stroke-width="28" stroke-linecap="round"/>
-<path d="M104 175h304l30 260H74z" fill="url(#g)"/>
-<path d="M258 213c-67 0-112 43-112 105s45 105 112 105c39 0 70-16 91-46l-58-41c-8 12-18 18-32 18-23 0-38-15-38-36s15-36 38-36c14 0 24 6 32 18l58-41c-21-30-52-46-91-46z" fill="#fff"/>
-<path d="M399 127l15 32 32 15-32 15-15 32-15-32-32-15 32-15z" fill="#ff4b98"/>
+<defs>
+ <linearGradient id="bag" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#ffca35"/><stop offset=".28" stop-color="#ff4d8d"/><stop offset=".62" stop-color="#8b20ed"/><stop offset="1" stop-color="#00c2ff"/></linearGradient>
+ <linearGradient id="handle" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#ff4d8d"/><stop offset=".55" stop-color="#8b20ed"/><stop offset="1" stop-color="#ff9a35"/></linearGradient>
+ <linearGradient id="shine" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#fff" stop-opacity=".55"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient>
+ <linearGradient id="spark" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#ff8ec5"/><stop offset="1" stop-color="#ff2d91"/></linearGradient>
+</defs>
+<rect width="512" height="512" rx="112" fill="#fff"/>
+<path d="M173 190v-48c0-55 37-91 83-91s83 36 83 91v48" fill="none" stroke="url(#handle)" stroke-width="30" stroke-linecap="round"/>
+<path d="M112 173Q117 151 143 151h226q27 0 32 24l34 244q5 38-34 38H111q-40 0-34-39z" fill="url(#bag)"/>
+<path d="M112 173Q117 151 143 151h226q27 0 32 24l34 244q5 38-34 38H111q-40 0-34-39z" fill="url(#shine)"/>
+<path d="M267 218c-69 0-116 45-116 108s47 108 116 108c41 0 73-17 95-48l-61-43c-9 13-20 20-35 20-25 0-41-16-41-37s16-37 41-37c15 0 26 7 35 20l61-43c-22-31-54-48-95-48z" fill="#fff"/>
+<path d="M405 250l18 38 38 18-38 18-18 38-18-38-38-18 38-18z" fill="url(#spark)"/>
 </svg>
