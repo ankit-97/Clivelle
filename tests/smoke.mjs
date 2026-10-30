@@ -12,7 +12,15 @@ try {
   assert.match(await page.title(), /CLIVELLE/i);
   assert.ok(await page.locator('.product-card').count() >= 8, 'catalogue renders');
   assert.equal(await page.locator('.hero-promos .hero-promo').count(), 3, 'homepage features three image-led promo cards');
-  assert.equal(await page.locator('.category-photo').count(), 4, 'category tiles include product photography');
+  assert.equal(await page.locator('.category-photo').count(), 6, 'six category tiles include product photography');
+  assert.equal(await page.locator('.feature-banners .feature-banner').count(), 3, 'homepage has three image-led feature banners');
+  assert.ok(await page.locator('#searchBox #searchInput').isVisible(), 'search is available in the main header');
+  await page.locator('#headerWishlist').click();
+  assert.ok(await page.locator('#wishlistModal.open').count(), 'header wishlist opens saved items');
+  await page.locator('#wishlistModal [data-close]').click();
+  await page.locator('.category-ribbon a[data-filter="Claw clips"]').click();
+  assert.ok(await page.locator('.product-card').count() >= 1, 'category shortcuts filter the product catalogue');
+  await page.locator('#filterRow [data-filter="All"]').click();
   assert.ok(await page.locator('.product-card img').evaluateAll(imgs => imgs.every(img => img.complete && img.naturalWidth > 0)), 'all catalogue product images load');
   assert.ok(await page.locator('.site-header .brand-logo').isVisible(), 'website brand logo renders');
   assert.ok(await page.locator('.announcement').isVisible(), 'website storefront header remains visible');
@@ -114,7 +122,9 @@ try {
   assert.ok(await appPage.locator('html.clv-app-mode').count(), 'installed app mode detected');
   assert.ok(await appPage.locator('.site-header').isVisible(), 'installed app storefront header renders');
   assert.equal(await appPage.locator('.hero-promos .hero-promo').count(), 3, 'installed app shares the same image-led homepage');
-  assert.equal(await appPage.locator('.category-photo').count(), 4, 'installed app shares product category images');
+  assert.equal(await appPage.locator('.category-photo').count(), 6, 'installed app shares all six category images');
+  assert.equal(await appPage.locator('.feature-banners .feature-banner').count(), 3, 'installed app shares image-led feature banners');
+  assert.ok(await appPage.locator('#searchBox #searchInput').isVisible(), 'installed app has a visible header search');
   assert.ok(await appPage.locator('.product-card img').evaluateAll(imgs => imgs.every(img => img.complete && img.naturalWidth > 0)), 'installed app loads every product image');
   assert.equal(await appPage.locator('.mobile-tabbar').evaluate(el => getComputedStyle(el).position), 'fixed', 'mobile app has fixed bottom navigation');
   const appLayout = await appPage.locator('.hero, .category-ribbon, .product-grid, .feature-grid').evaluateAll(els => els.map(el => ({display:getComputedStyle(el).display,columns:getComputedStyle(el).gridTemplateColumns,flexDirection:getComputedStyle(el).flexDirection})));
@@ -150,7 +160,7 @@ try {
   assert.equal(liveIcon.status(), 200, 'published unique home-screen icon responds');
   assert.ok((liveIcon.headers()['content-type'] || '').includes('image/png'), 'published home-screen icon has PNG content type');
   await liveContext.close();
-  console.log('CLIVELLE SMOKE TESTS PASSED: website/app shared responsive layout, image-led promotions, category/product photography, search, product detail, finder, colour filter, bundles, sign-in, bag quantities, gift options, reviews, checkout, rewards and cache-busted PNG icon.');
+  console.log('CLIVELLE SMOKE TESTS PASSED: reference-matched shared website/app layout, six category tiles, image-led hero promos and banners, header search/wishlist, category navigation, product detail, finder, colour filter, bundles, sign-in, bag quantities, gift options, reviews, checkout, rewards and cache-busted PNG icon.');
 } finally {
   await browser.close();
 }
