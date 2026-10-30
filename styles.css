@@ -354,3 +354,224 @@ body{font-family:'Poppins','DM Sans',sans-serif;color:var(--clv-ink);background:
  .category-photo{height:58px}
 }
 .clv-app-mode body{padding-bottom:calc(62px + env(safe-area-inset-bottom))}
+
+
+/* Clivelle launch storefront — photographic merchandising, aligned to the approved reference */
+.clv-atlas-photo,.clv-photo-crop{
+ display:block;
+ background-image:url('./clivelle-photo-grid.jpg');
+ background-size:300% 400%;
+ background-position:var(--photo-x,0%) var(--photo-y,0%);
+ background-repeat:no-repeat;
+}
+.hero.fashion-hero{
+ display:grid;
+ grid-template-columns:minmax(0,1.02fr) minmax(0,1fr) minmax(230px,.60fr);
+ grid-template-rows:minmax(320px,390px);
+ gap:12px;
+ height:auto;min-height:0;
+ padding:12px 2%;
+ background:#fff;
+ overflow:visible;
+}
+.hero-image{
+ grid-column:1/3;grid-row:1;
+ position:relative;min-height:0;height:100%;
+ border-radius:17px;overflow:hidden;
+ background:#ffe5ef url('./clivelle-hero-launch.jpg') 58% 42%/cover no-repeat!important;
+}
+.hero-image:before{display:none!important;content:none!important;background:none!important}
+.hero-image:after{
+ content:"";position:absolute;inset:0;z-index:1;
+ background:linear-gradient(90deg,rgba(255,235,245,.97) 0%,rgba(255,235,245,.89) 28%,rgba(255,235,245,.56) 43%,rgba(255,235,245,.06) 69%,transparent 100%);
+}
+.hero-copy{
+ grid-column:1;grid-row:1;z-index:2;
+ width:100%;padding:26px 7% 24px 6%;
+ background:transparent;border-radius:17px;
+ justify-content:center;align-items:flex-start;
+}
+.hero-mini-brand{display:none}
+.hero-copy .eyebrow{font-size:9px;letter-spacing:.07em;color:#783d9d;margin-bottom:12px}
+.hero h1{font-size:clamp(34px,4.1vw,57px);line-height:1.03;font-weight:800;letter-spacing:-.055em;color:#241447;max-width:410px}
+.hero h1 em{font-style:normal;color:#7a269d}
+.hero-desc{font-size:12px;line-height:1.55;color:#34294d;max-width:290px;margin:15px 0 18px}
+.hero-copy>.button{padding:12px 20px;border-radius:10px;font-size:11px;gap:17px}
+.hero-note{margin-top:15px;font-size:9px;letter-spacing:0;color:#674765}
+.hero-tag{display:none}
+.hero-promos{
+ grid-column:3;grid-row:1;
+ min-height:0;height:100%;
+ display:grid;grid-template-columns:1fr;grid-template-rows:repeat(3,minmax(0,1fr));gap:10px;
+}
+.hero-promo{
+ display:flex;flex-direction:row-reverse;align-items:center;justify-content:space-between;
+ gap:7px;min-width:0;min-height:0;padding:9px 11px;border-radius:14px;overflow:hidden;
+ color:#171735;background:linear-gradient(110deg,#f4e7ff,#ffe3ef);
+ box-shadow:0 5px 16px #26133d0a;
+}
+.hero-promo .promo-photo{
+ flex:0 0 43%;width:43%;height:100%;min-height:0;
+ border-radius:9px;background-color:#fff1f6;
+}
+.hero-promo .promo-copy{
+ display:flex;flex:1;min-width:0;flex-direction:column;align-items:flex-start;gap:4px;
+}
+.hero-promo b{font-size:clamp(11px,1.05vw,15px);line-height:1.18;color:#151638}
+.hero-promo small{display:block;font-size:8px;line-height:1.35;color:#55546d}
+.hero-promo em{font-style:normal;background:#35144f;color:#fff;border-radius:7px;padding:6px 10px;font-size:8px;margin-top:2px}
+.promo-bundle{background:linear-gradient(110deg,#fff5e9,#ffe1ec)}
+.promo-gift{background:linear-gradient(110deg,#f2e9ff,#ffeaf2)}
+.category-ribbon{
+ display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:14px;
+ padding:19px 3%;background:#fff;border:0;
+}
+.category-ribbon a{
+ display:flex;flex-direction:column;align-items:center;gap:7px;
+ padding:0;border:0;border-radius:12px;background:#fff;text-align:center;box-shadow:none;
+}
+.category-ribbon .category-photo{
+ display:block;width:100%;height:auto;aspect-ratio:1.285;border-radius:12px;
+ background-color:#f8e8e4;box-shadow:none;
+}
+.category-ribbon b{font-size:11px;color:#151936}
+.category-ribbon small,.category-ribbon .category-icon{display:none!important}
+.trust-strip{
+ display:flex;min-height:54px;height:auto;flex-wrap:wrap;justify-content:space-around;align-items:center;
+ gap:10px;padding:11px 3%;background:#fff;border-top:1px solid #f5edf4;border-bottom:1px solid #f5edf4;
+ color:#373d5c;font:500 10px 'Poppins',sans-serif;
+}
+.trust-strip span{display:flex;align-items:center;gap:7px}
+.feature-banners{
+ display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;
+ padding:14px 3% 4px;
+}
+.feature-banner{
+ display:flex;position:relative;isolation:isolate;align-items:center;justify-content:space-between;
+ gap:8px;min-height:142px;padding:14px;border-radius:13px;overflow:hidden;
+ background:linear-gradient(120deg,#ffe3ed,#fff0f6);color:#141936;
+}
+.feature-banner span:first-child{display:flex;flex-direction:column;align-items:flex-start;gap:6px;max-width:64%;z-index:2}
+.feature-banner b{font-size:clamp(14px,1.45vw,21px);line-height:1.15}
+.feature-banner small{font-size:9px;line-height:1.4;color:#555b73}
+.feature-banner em{font-style:normal;background:var(--clv-pink);color:#fff;border-radius:7px;padding:7px 11px;font-size:9px}
+.feature-banner .feature-photo,.feature-banner .feature-hero-photo{
+ display:block;position:absolute;z-index:1;right:0;top:0;bottom:0;width:43%;height:100%;
+ background-color:#f8e6ed;background-size:cover;background-position:center;
+ opacity:1;mix-blend-mode:multiply;
+}
+.feature-banner .feature-hero-photo{background-image:url('./clivelle-hero-launch.jpg');background-position:62% center}
+.banner-bundle{background:linear-gradient(120deg,#ffe3ed,#fff0f6)}
+.banner-finder{background:linear-gradient(120deg,#e9ddff,#fff0f6)}
+.banner-colour{background:linear-gradient(120deg,#ffe4f1,#e9e1ff)}
+.collection.section-wrap{padding:34px 3% 48px}
+.collection .section-heading{margin-bottom:14px}
+.collection .section-heading h2{font-size:30px;font-weight:800}
+.collection .section-heading .eyebrow{margin-bottom:6px;font-size:8px}
+.collection .filter-row{margin-bottom:16px;gap:7px}
+.collection .filter-chip{border-radius:999px;padding:7px 12px;font-size:9px}
+.product-grid{grid-template-columns:repeat(6,minmax(0,1fr));gap:13px}
+.product-card{border:1px solid #f0e8f2;border-radius:11px;overflow:hidden;background:#fff;box-shadow:0 4px 15px #21133a08}
+.product-photo{aspect-ratio:1.285;border-radius:0;background:#fff0f6}
+.product-photo img,.product-photo .clv-photo-crop{width:100%;height:100%;display:block;object-fit:cover}
+.product-photo .clv-photo-crop{position:absolute;inset:0}
+.product-badge{top:8px;left:8px;padding:5px 7px;background:#fff;color:#7a3299;border-radius:20px;font-size:7px}
+.wishlist-toggle{top:8px;right:8px;width:27px;height:27px;font-size:16px}
+.quick-add{left:7px;right:7px;bottom:7px;height:30px;border-radius:7px;background:var(--clv-pink);color:#fff;font-size:8px;opacity:1;transform:none}
+.product-info{display:block;padding:8px 9px 10px}
+.product-name{font:600 10px/1.35 'Poppins',sans-serif;color:#151936}
+.product-kind{font-size:8px}
+.product-rating{font-size:9px;color:#f39a28}
+.product-price{text-align:left;font-size:11px;margin-top:4px}
+.product-price del{font-size:8px}
+.clv-feature-hub{padding:44px 3% 60px}
+.clv-feature-hub .section-heading h2{font-size:30px;font-weight:800}
+.feature-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:13px}
+.feature-tile{border-radius:15px;min-height:220px}
+.detail-photo .clv-photo-crop{width:100%;height:100%;min-height:310px}
+.bag-row .clv-photo-crop{width:78px;height:92px;flex:0 0 78px}
+.checkout-item .clv-photo-crop{width:42px;height:48px;flex:0 0 42px}
+.wishlist-item .clv-photo-crop{width:92px;height:110px;border-radius:10px;flex:0 0 92px}
+.admin-product .clv-photo-crop{width:55px;height:62px;flex:0 0 55px}
+@media(max-width:1050px){
+ .header-top{grid-template-columns:155px minmax(180px,1fr) 205px;gap:12px}
+ .brand-logo{width:150px}
+ .main-nav{gap:7px;font-size:9px}
+ .hero.fashion-hero{grid-template-columns:minmax(0,1fr) minmax(0,1fr) minmax(190px,.62fr);grid-template-rows:minmax(300px,350px)}
+ .hero h1{font-size:clamp(32px,4vw,45px)}
+ .product-grid{grid-template-columns:repeat(4,minmax(0,1fr))}
+}
+@media(max-width:700px){
+ .announcement{height:26px;justify-content:center;gap:0;font-size:8px;white-space:nowrap;overflow:hidden}
+ .announcement span:not(:first-child){display:none}
+ .site-header{padding:0 4%;gap:0}
+ .header-top{min-height:58px;grid-template-columns:1fr auto;gap:8px}
+ .brand-logo{width:132px;max-height:45px}
+ .menu-toggle{display:none}
+ .header-search{grid-column:1/-1;grid-row:2;height:36px;margin:0 0 9px;border-radius:8px}
+ .header-search>button{width:39px}
+ .header-actions{grid-column:2;grid-row:1;gap:8px}
+ .header-actions .icon-button{min-width:29px;font-size:17px}
+ .header-actions .icon-button small,.header-actions .bag-trigger small{font-size:7px}
+ .header-actions .bag-trigger{min-width:30px;font-size:17px}
+ .header-actions .bag-count{top:-5px;right:-3px;width:15px;height:15px;font-size:8px}
+ .main-nav{display:none}
+ .main-nav.open{display:flex;position:absolute;top:102px;left:0;right:0;z-index:40;height:auto;padding:12px 4%;background:#fff;box-shadow:0 12px 24px #11193618;flex-wrap:wrap;white-space:normal}
+ .hero.fashion-hero{display:grid;grid-template-columns:1fr .8fr;grid-template-rows:220px 104px;height:auto;min-height:0;padding:10px 3%;gap:9px}
+ .hero-image{grid-column:1/3;grid-row:1;border-radius:15px;background-position:62% center!important}
+ .hero-image:after{background:linear-gradient(90deg,rgba(255,235,244,.97) 0%,rgba(255,235,244,.83) 43%,rgba(255,235,244,.08) 83%,transparent 100%)}
+ .hero-copy{grid-column:1;grid-row:1;padding:14px 0 12px 5%;width:100%;justify-content:center}
+ .hero-copy .eyebrow{font-size:7px;margin-bottom:7px;max-width:190px}
+ .hero h1{font-size:clamp(25px,7vw,34px);max-width:195px}
+ .hero-desc{font-size:8px;line-height:1.4;max-width:155px;margin:8px 0}
+ .hero-copy>.button{font-size:8px;padding:8px 11px;gap:8px}
+ .hero-note{font-size:7px;margin-top:8px}
+ .hero-promos{grid-column:1/3;grid-row:2;grid-template-columns:repeat(3,minmax(0,1fr));grid-template-rows:104px;gap:7px;min-height:0;height:auto}
+ .hero-promo,.hero-promo:last-child{grid-column:auto;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;padding:6px 4px;text-align:center;border-radius:12px}
+ .hero-promo .promo-photo{flex:0 0 45px;width:65%;height:45px;min-height:0;border-radius:7px}
+ .hero-promo .promo-copy{width:100%;flex:0 0 auto;align-items:center;gap:3px}
+ .hero-promo b{font-size:8px;line-height:1.15}
+ .hero-promo small{display:block;font-size:6px;line-height:1.2;max-width:100%}
+ .hero-promo em{font-size:7px;padding:4px 6px;margin-top:1px}
+ .trust-strip{display:none}
+ .category-ribbon{grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;padding:13px 3%}
+ .category-ribbon .category-photo{height:auto;aspect-ratio:1.285;border-radius:9px}
+ .category-ribbon b{font-size:8px}
+ .feature-banners{grid-template-columns:repeat(3,minmax(0,1fr));gap:7px;padding:10px 3% 0}
+ .feature-banner{min-height:106px;padding:7px;border-radius:10px;align-items:flex-end}
+ .feature-banner span:first-child{max-width:100%;gap:4px}
+ .feature-banner b{font-size:9px}
+ .feature-banner small{font-size:7px}
+ .feature-banner em{font-size:7px;padding:5px 6px}
+ .feature-banner .feature-photo,.feature-banner .feature-hero-photo{width:52%;height:76px;top:0;bottom:auto;opacity:.25}
+ .collection.section-wrap{padding:28px 3% 35px}
+ .collection .section-heading h2{font-size:22px}
+ .collection .section-heading .eyebrow{font-size:7px}
+ .filter-row{overflow-x:auto;flex-wrap:nowrap;scrollbar-width:none}
+ .filter-chip{white-space:nowrap}
+ .product-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+ .product-photo{aspect-ratio:1.285}
+ .product-info{padding:7px}
+ .product-name{font-size:9px}
+ .quick-add{height:27px;font-size:7px}
+ .clv-feature-hub{padding:32px 3% 45px}
+ .clv-feature-hub .section-heading h2{font-size:22px}
+ .feature-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+ .feature-tile{min-height:0;padding:12px}
+ .feature-tile h3{font-size:14px}
+ .feature-tile>p:not(.eyebrow){font-size:9px}
+ .feature-tile .button{font-size:8px;padding:8px}
+ .community-feed{margin-top:22px}
+ .mobile-tabbar{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:50;height:calc(62px + env(safe-area-inset-bottom));padding:6px 6px calc(6px + env(safe-area-inset-bottom));justify-content:space-around;align-items:center;background:rgba(255,255,255,.97);border-top:1px solid #f0e8f5;box-shadow:0 -7px 22px #21133a10;backdrop-filter:blur(14px)}
+ .mobile-tabbar a,.mobile-tabbar button{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;border:0;background:transparent;color:#747b91;font:500 8px 'Poppins',sans-serif}
+ .mobile-tabbar a span,.mobile-tabbar button span{font-size:19px;line-height:1}
+ .mobile-tabbar .tab-active{color:var(--clv-pink)}
+ body{padding-bottom:calc(62px + env(safe-area-inset-bottom))}
+}
+@media(max-width:380px){
+ .hero.fashion-hero{grid-template-rows:205px 100px}
+ .hero h1{font-size:25px}
+ .hero-promos{grid-template-rows:100px}
+ .category-photo{height:auto}
+}
+.clv-app-mode body{padding-bottom:calc(62px + env(safe-area-inset-bottom))}
