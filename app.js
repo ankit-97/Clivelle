@@ -86,6 +86,7 @@ const originalRenderBag=renderBag;renderBag=function(){originalRenderBag();rende
 const originalRenderAccount=renderAccount;renderAccount=function(){originalRenderAccount();renderRewards()};
 const originalPlaceOrder=$('#placeOrder').onclick;
 $('#placeOrder').addEventListener('click',()=>{});
-\nrenderProducts();renderBag();renderBundleChoices();renderReviews();renderRewards();
+
+renderProducts();renderBag();renderBundleChoices();renderReviews();renderRewards();
 
 
