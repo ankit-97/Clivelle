@@ -10,8 +10,7 @@
       var standalone = window.matchMedia && window.matchMedia('(display-mode: standalone)').matches;
       var iosStandalone = window.navigator.standalone === true;
       var nativeShell = !!(window.Capacitor && typeof window.Capacitor.isNativePlatform === 'function' && window.Capacitor.isNativePlatform()) || /Capacitor/i.test(navigator.userAgent);
-      var appPreview = new URLSearchParams(window.location.search).get('app') === '1';
-      if (standalone || iosStandalone || nativeShell || appPreview) document.documentElement.classList.add('clv-app-mode');
+      if (standalone || iosStandalone || nativeShell) document.documentElement.classList.add('clv-app-mode');
     })();
   </script>
   <link rel="manifest" href="./manifest.webmanifest" />
