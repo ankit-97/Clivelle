@@ -94,18 +94,21 @@ try {
   await appContext.close();
 
   // Verify the deployed GitHub Pages build, not only the local test server.
-  const liveHome = await page.request.get('https://ankit-97.github.io/Clivelle/');
+  const liveContext = await browser.newContext();
+  const livePage = await liveContext.newPage();
+  const liveHome = await livePage.request.get('https://ankit-97.github.io/Clivelle/');
   assert.equal(liveHome.status(), 200, 'published website responds');
   const liveHtml = await liveHome.text();
   assert.ok(liveHtml.includes('clivelle-home-icon-v9.png'), 'published page references the new iOS icon URL');
-  const liveManifestResponse = await page.request.get('https://ankit-97.github.io/Clivelle/manifest.webmanifest');
+  const liveManifestResponse = await livePage.request.get('https://ankit-97.github.io/Clivelle/manifest.webmanifest');
   assert.equal(liveManifestResponse.status(), 200, 'published web manifest responds');
   const liveManifest = await liveManifestResponse.json();
   assert.ok(liveManifest.icons.some(icon => icon.src === './clivelle-home-icon-v9.png'), 'published manifest points to the new icon');
-  const liveIcon = await page.request.get('https://ankit-97.github.io/Clivelle/clivelle-home-icon-v9.png');
+  const liveIcon = await livePage.request.get('https://ankit-97.github.io/Clivelle/clivelle-home-icon-v9.png');
   assert.equal(liveIcon.status(), 200, 'published unique home-screen icon responds');
   assert.ok((liveIcon.headers()['content-type'] || '').includes('image/png'), 'published home-screen icon has PNG content type');
 
+  await liveContext.close();
   console.log('CLIVELLE SMOKE TESTS PASSED: website, search, product detail, finder, colour filter, bundle discount, sign-in, gift options, reviews, checkout, rewards, installed-app layout and PNG icon.');
 } finally {
   await browser.close();
