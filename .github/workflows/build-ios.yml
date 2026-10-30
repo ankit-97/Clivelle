@@ -10,7 +10,7 @@ on:
       - 'app.js'
       - '*.svg'
       - 'package.json'
-      - 'capacitor.config.ts'
+      - 'capacitor.config.json'
       - 'scripts/**'
       - '.github/workflows/build-ios.yml'
 
