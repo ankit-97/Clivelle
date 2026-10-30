@@ -21,6 +21,7 @@ try {
   await page.locator('.product-name').first().click();
   assert.ok(await page.locator('#productModal.open').count(), 'product detail opens');
   await page.locator('#productModal [data-close]').click();
+  await page.locator('.wishlist-toggle').first().click();
 
   // Hair accessory finder
   await page.locator('#openFinder').click();
@@ -75,6 +76,19 @@ try {
   await page.locator('#placeOrder').click();
   assert.equal(await page.locator('#confirmationModal.open').count(), 1, 'demo order confirmation appears');
   assert.ok(Number(await page.locator('#rewardPoints').innerText()) > 0, 'rewards points credited after demo order');
+  await page.locator('#confirmationModal [data-close]').click();
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.locator('.mobile-tabbar a').filter({ hasText: 'Wishlist' }).click();
+  assert.equal(await page.locator('#wishlistItems .wishlist-item').count(), 1, 'wishlist saves and displays a product');
+  await page.locator('#wishlistModal [data-close]').click();
+  await page.locator('.mobile-tabbar a').filter({ hasText: 'Orders' }).click();
+  assert.equal(await page.locator('#ordersList .history-item').count(), 1, 'order history displays the placed demo order');
+  await page.locator('#ordersModal [data-close]').click();
+  await page.locator('#mobileAccount').click();
+  assert.equal(await page.locator('#accountModal.open').count(), 1, 'account screen opens from mobile navigation');
+  assert.match(await page.locator('#accountDetails').innerText(), /Clivelle Tester/);
+  await page.locator('#accountModal [data-close]').click();
+  await page.locator('#copyReferral').click();
   assert.deepEqual(errors, [], 'no uncaught JavaScript errors during website flow');
   await context.close();
 
