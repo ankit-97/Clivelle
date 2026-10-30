@@ -8,6 +8,7 @@ try {
   const page = await context.newPage();
   page.on('pageerror', e => errors.push(e.message));
   await page.goto('http://127.0.0.1:4173/', { waitUntil: 'networkidle' });
+  await page.waitForFunction(async () => { const reg = await navigator.serviceWorker?.getRegistration(); return !!reg?.active && reg.active.state === 'activated'; }, { timeout: 15000 });
   assert.match(await page.title(), /CLIVELLE/i);
   assert.ok(await page.locator('.product-card').count() >= 8, 'catalogue renders');
   assert.ok(await page.locator('.site-header .brand-logo').isVisible(), 'website brand logo renders');
