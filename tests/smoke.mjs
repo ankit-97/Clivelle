@@ -13,6 +13,11 @@ try {
   assert.ok(await page.locator('.product-card').count() >= 8, 'catalogue renders');
   assert.ok(await page.locator('.site-header .brand-logo').isVisible(), 'website brand logo renders');
   assert.ok(await page.locator('.announcement').isVisible(), 'website storefront header remains visible');
+  assert.ok(await page.locator('.main-nav').isVisible(), 'website desktop navigation remains visible');
+  await page.locator('#searchInput').fill('no-such-accessory');
+  assert.equal(await page.locator('.product-card').count(), 0, 'empty search returns no false matches');
+  assert.equal(await page.locator('#emptyState').isVisible(), true, 'empty search feedback is visible');
+  await page.locator('#searchInput').fill('');
 
   // Product search and product detail
   await page.locator('#searchInput').fill('Rosewood');
@@ -46,6 +51,11 @@ try {
   await page.locator('#authForm button').click();
   assert.equal(await page.locator('#bagDrawer.open').count(), 1, 'bundle opens bag after sign-in');
   assert.match(await page.locator('#bagSubtotal').innerText(), /430/, '10 percent bundle saving reaches bag total');
+  await page.locator('.bag-row').first().locator('[data-delta="1"]').click();
+  assert.equal(await page.locator('#bagCount').innerText(), '3', 'bag quantity increase updates count');
+  await page.locator('.bag-row').first().locator('[data-delta="-1"]').click();
+  assert.equal(await page.locator('#bagCount').innerText(), '2', 'bag quantity decrease restores count');
+  assert.match(await page.locator('#bagSubtotal').innerText(), /430/, 'bundle price recalculates after quantity changes');
   await page.locator('#bagDrawer [data-close]').click();
 
   // Gift options persist and review can be submitted
@@ -99,10 +109,14 @@ try {
   appPage.on('pageerror', e => errors.push(e.message));
   await appPage.goto('http://127.0.0.1:4173/', { waitUntil: 'networkidle' });
   assert.ok(await appPage.locator('html.clv-app-mode').count(), 'installed app mode detected');
+  assert.ok(await appPage.locator('.site-header').isVisible(), 'installed app has a compact app header');
+  assert.equal(await appPage.locator('.main-nav').isVisible().catch(() => false), false, 'installed app hides website navigation');
+  assert.equal(await appPage.locator('.story-band').isVisible().catch(() => false), false, 'installed app hides editorial website story section');
+  assert.equal(await appPage.locator('footer').isVisible().catch(() => false), false, 'installed app hides website footer');
   assert.equal(await appPage.locator('.announcement').isVisible().catch(() => false), false, 'app hides website announcement bar');
   assert.equal(await appPage.locator('.mobile-tabbar').evaluate(el => getComputedStyle(el).position), 'fixed', 'app has fixed native-style bottom navigation');
   assert.equal(await appPage.locator('.product-grid').evaluate(el => getComputedStyle(el).gridTemplateColumns.split(' ').length), 2, 'app uses two-column shopping cards');
-  const icon = await appPage.request.get('http://127.0.0.1:4173/clivelle-home-icon-v9.png');
+  const icon = await appPage.request.get('http://127.0.0.1:4173/clivelle-home-icon-v9.png?rev=10');
   assert.equal(icon.status(), 200, 'unique iOS home-screen icon is served');
   assert.match(icon.headers()['content-type'] || '', /image\/png/i, 'home-screen icon is a PNG');
   assert.deepEqual(errors, [], 'no uncaught JavaScript errors in installed app shell');
@@ -119,16 +133,16 @@ try {
     await new Promise(resolve => setTimeout(resolve, 5000));
   }
   assert.equal(liveHome.status(), 200, 'published website responds');
-  assert.ok(liveHtml.includes('clivelle-home-icon-v9.png'), 'published page references the new iOS icon URL');
+  assert.ok(liveHtml.includes('clivelle-home-icon-v9.png?rev=10'), 'published page references the cache-busted iOS icon URL');
   const liveManifestResponse = await livePage.request.get('https://ankit-97.github.io/Clivelle/manifest.webmanifest');
   assert.equal(liveManifestResponse.status(), 200, 'published web manifest responds');
   const liveManifest = await liveManifestResponse.json();
-  assert.ok(liveManifest.icons.some(icon => icon.src === './clivelle-home-icon-v9.png'), 'published manifest points to the new icon');
-  const liveIcon = await livePage.request.get('https://ankit-97.github.io/Clivelle/clivelle-home-icon-v9.png');
+  assert.ok(liveManifest.icons.some(icon => icon.src === './clivelle-home-icon-v9.png?rev=10'), 'published manifest points to the cache-busted icon');
+  const liveIcon = await livePage.request.get('https://ankit-97.github.io/Clivelle/clivelle-home-icon-v9.png?rev=10');
   assert.equal(liveIcon.status(), 200, 'published unique home-screen icon responds');
   assert.ok((liveIcon.headers()['content-type'] || '').includes('image/png'), 'published home-screen icon has PNG content type');
   await liveContext.close();
-  console.log('CLIVELLE SMOKE TESTS PASSED: website, search, product detail, finder, colour filter, bundle discount, sign-in, gift options, reviews, checkout, rewards, installed-app layout and PNG icon.');
+  console.log('CLIVELLE SMOKE TESTS PASSED: website navigation, search/empty state, product detail, finder, colour filter, bundle discount, sign-in, bag quantities, gift options, reviews, checkout, rewards, installed-app layout and cache-busted PNG icon.');
 } finally {
   await browser.close();
 }
