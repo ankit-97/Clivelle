@@ -23,7 +23,7 @@ try {
 
   // Hair accessory finder
   await page.locator('#openFinder').click();
-  await page.locator('#finderForm button[type=submit]').click();
+  await page.locator('#finderForm button').click();
   assert.equal(await page.locator('#finderResults').isVisible(), true, 'finder returns recommendations');
   await page.locator('#finderModal [data-close]').click();
 
@@ -41,7 +41,7 @@ try {
   await page.locator('#authName').fill('Clivelle Tester');
   await page.locator('#authPhone').fill('9876543210');
   await page.locator('#acceptTerms').check();
-  await page.locator('#authForm button[type=submit]').click();
+  await page.locator('#authForm button').click();
   assert.equal(await page.locator('#bagDrawer.open').count(), 1, 'bundle opens bag after sign-in');
   assert.match(await page.locator('#bagSubtotal').innerText(), /430/, '10 percent bundle saving reaches bag total');
   await page.locator('#bagDrawer [data-close]').click();
@@ -55,7 +55,7 @@ try {
   await page.locator('#openReview').click();
   await page.locator('#reviewForm input[name=name]').fill('A Tester');
   await page.locator('#reviewForm textarea[name=message]').fill('Lovely quality and colour.');
-  await page.locator('#reviewForm button[type=submit]').click();
+  await page.locator('#reviewForm button').click();
   assert.equal(await page.locator('#reviewCount').innerText(), '1', 'review saved and feed refreshed');
 
   // Checkout, address validation, demo order and rewards
@@ -70,7 +70,7 @@ try {
   await address.locator('[name=city]').fill('New Delhi');
   await address.locator('[name=state]').fill('Delhi');
   await address.locator('[name=pin]').fill('110067');
-  await address.locator('button[type=submit]').click();
+  await address.locator('button').click();
   await page.locator('#placeOrder').click();
   assert.equal(await page.locator('#confirmationModal.open').count(), 1, 'demo order confirmation appears');
   assert.ok(Number(await page.locator('#rewardPoints').innerText()) > 0, 'rewards points credited after demo order');
