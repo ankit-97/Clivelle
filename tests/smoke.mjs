@@ -10,7 +10,7 @@ try {
   await page.goto('http://127.0.0.1:4173/', { waitUntil: 'networkidle' });
   assert.match(await page.title(), /CLIVELLE/i);
   assert.ok(await page.locator('.product-card').count() >= 8, 'catalogue renders');
-  assert.ok(await page.locator('.brand-logo').isVisible(), 'website brand logo renders');
+  assert.ok(await page.locator('.site-header .brand-logo').isVisible(), 'website brand logo renders');
   assert.ok(await page.locator('.announcement').isVisible(), 'website storefront header remains visible');
 
   // Product search and product detail
