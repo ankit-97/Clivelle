@@ -86,7 +86,7 @@ try {
   await page.locator('#ordersModal [data-close]').click();
   await page.locator('#mobileAccount').click();
   assert.equal(await page.locator('#accountModal.open').count(), 1, 'account screen opens from mobile navigation');
-  assert.match(await page.locator('#accountDetails').innerText(), /Clivelle Tester/);
+  assert.match(await page.locator('#accountDetails').textContent(), /Clivelle Tester/);
   await page.locator('#accountModal [data-close]').click();
   await page.locator('#copyReferral').click();
   assert.deepEqual(errors, [], 'no uncaught JavaScript errors during website flow');
