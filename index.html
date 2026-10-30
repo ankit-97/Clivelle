@@ -2,12 +2,20 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="theme-color" content="#101b4c" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#111936" />
   <meta name="description" content="CLIVELLE — colourful little things for your hair." />
+  <script>
+    (function () {
+      var standalone = window.matchMedia && window.matchMedia('(display-mode: standalone)').matches;
+      var iosStandalone = window.navigator.standalone === true;
+      var nativeShell = !!(window.Capacitor && typeof window.Capacitor.isNativePlatform === 'function' && window.Capacitor.isNativePlatform()) || /Capacitor/i.test(navigator.userAgent);
+      if (standalone || iosStandalone || nativeShell) document.documentElement.classList.add('clv-app-mode');
+    })();
+  </script>
   <link rel="manifest" href="./manifest.webmanifest" />
   <link rel="icon" href="./clivelle-icon.svg?v=6" type="image/svg+xml" />
-  <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png?v=6" />
+  <link rel="apple-touch-icon" sizes="180x180" href="./clivelle-home-icon-v9.png" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="default" />
   <meta name="apple-mobile-web-app-title" content="Clivelle" />

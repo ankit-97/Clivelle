@@ -9,20 +9,20 @@
   "display": "standalone",
   "orientation": "portrait",
   "background_color": "#ffffff",
-  "theme_color": "#101b4c",
+  "theme_color": "#111936",
   "categories": [
     "shopping",
     "lifestyle"
   ],
   "icons": [
     {
-      "src": "./apple-touch-icon.png?v=6",
+      "src": "./clivelle-home-icon-v9.png",
       "sizes": "180x180",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "./clivelle-icon.svg?v=6",
+      "src": "./clivelle-icon.svg?v=9",
       "sizes": "any",
       "type": "image/svg+xml",
       "purpose": "any"

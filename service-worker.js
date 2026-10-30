@@ -1,4 +1,4 @@
-const CACHE_NAME = "clivelle-pwa-v8";
+const CACHE_NAME = "clivelle-pwa-v9";
 const BASE_URL = new URL("./", self.location.href);
 const APP_SHELL = [
   "",
@@ -9,6 +9,7 @@ const APP_SHELL = [
   "manifest.webmanifest",
   "clivelle-icon.svg",
   "apple-touch-icon.png",
+  "clivelle-home-icon-v9.png",
   "clivelle-logo.svg",
   "hero-editorial.svg",
   "story-editorial.svg",
