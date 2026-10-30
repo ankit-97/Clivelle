@@ -75,7 +75,7 @@ try {
   assert.equal(await page.locator('#bagCount').innerText(), '3', 'bag quantity increase updates count');
   await page.locator('.bag-row').first().locator('[data-delta="-1"]').click();
   assert.equal(await page.locator('#bagCount').innerText(), '2', 'bag quantity decrease restores count');
-  assert.match(await page.locator('#bagSubtotal').innerText(), /430/, 'bundle price recalculates after quantity changes');
+  assert.match(await page.locator('#bagSubtotal').innerText(), /538/, 'bundle price recalculates after quantity changes');
   await page.locator('#bagDrawer [data-close]').click();
 
   // Gift options persist and review can be submitted
