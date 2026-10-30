@@ -9,3 +9,31 @@
 
 .footer-admin{padding:0;border:0;background:none;color:inherit;text-align:left;font:inherit;cursor:pointer}.footer-admin:hover{text-decoration:underline}.admin-summary{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:17px 0 24px}.admin-summary>div{background:#faf6f1;padding:12px;display:flex;flex-direction:column;gap:5px}.admin-summary b{font:18px var(--serif)}.admin-summary span{font-size:8px;color:#8d807a}.admin-products{max-height:44vh;overflow:auto}.admin-product{display:grid;grid-template-columns:55px 1fr auto;gap:12px;align-items:center;border-top:1px solid var(--line);padding:10px 0}.admin-product img{width:55px;height:62px;object-fit:cover;background:var(--blush)}.admin-product>div:nth-child(2){display:flex;flex-direction:column;gap:5px;font-size:10px}.admin-product small{font-size:8px;color:#8b7f79}.admin-product .address-actions{gap:9px}.admin-summary~.checkout-section-title{margin-top:18px}.policy-content{font-size:11px;line-height:1.9;color:#756963;margin:18px 0 22px}.address-modal input[type=file]{height:auto;padding:9px}.address-modal .fine-print{margin:0}@media(max-width:650px){.admin-summary{grid-template-columns:1fr 1fr}.admin-product{grid-template-columns:45px 1fr}.admin-product img{width:45px;height:52px}.admin-product .address-actions{grid-column:2;justify-content:flex-start}.admin-products{max-height:38vh}}
 
+
+
+/* PWA install control */
+.pwa-install-button {
+  position: fixed;
+  z-index: 1200;
+  right: max(18px, env(safe-area-inset-right));
+  bottom: max(18px, env(safe-area-inset-bottom));
+  border: 1px solid #302723;
+  border-radius: 999px;
+  background: #302723;
+  color: #fffaf7;
+  padding: 12px 18px;
+  font: 600 13px/1.2 "DM Sans", sans-serif;
+  letter-spacing: .02em;
+  box-shadow: 0 8px 28px rgba(35, 25, 20, .2);
+  cursor: pointer;
+}
+.pwa-install-button:focus-visible {
+  outline: 3px solid #b88b72;
+  outline-offset: 3px;
+}
+@media (max-width: 520px) {
+  .pwa-install-button {
+    right: 14px;
+    bottom: max(14px, env(safe-area-inset-bottom));
+  }
+}
