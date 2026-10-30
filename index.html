@@ -26,26 +26,46 @@
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <div class="announcement">✦ LITTLE DETAILS. BIG PERSONALITY. · FREE SHIPPING ON ORDERS OVER ₹999 ✦</div>
+  <div class="announcement"><span>🚚 Free Delivery on orders above ₹499</span><span>♡ Loved by 1000+ Happy Customers</span><span>◷ Easy Returns</span><span>♙ Secure Payments</span></div>
   <header class="site-header">
-    <button class="icon-button menu-toggle" aria-label="Open menu" id="menuToggle"><span>☰</span></button>
-    <a class="wordmark brand-lockup" href="#home" aria-label="Clivelle home"><img class="brand-logo" src="./clivelle-logo.svg" alt="Clivelle — Shop smart, live stylish"></a>
-      <nav class="main-nav" id="mainNav">
-      <a href="#shop">Shop all</a><a href="#shop" data-filter="Claw clips">Claw clips</a><a href="#shop" data-filter="Hairbands">Hairbands</a><a href="#shop" data-filter="Hair clips">Hair clips</a><a href="#shop" data-filter="Scrunchies">Scrunchies</a>
-    </nav>
-    <div class="header-actions">
-      <button class="icon-button search-trigger" id="searchTrigger" aria-label="Search">⌕</button>
-      <button class="icon-button account-trigger" id="accountTrigger" aria-label="My account">♙</button>
-      <button class="bag-trigger" id="bagTrigger" aria-label="Shopping bag">Bag <span class="bag-count" id="bagCount">0</span></button>
+    <div class="header-top">
+      <button class="icon-button menu-toggle" aria-label="Open menu" id="menuToggle">☰</button>
+      <a class="wordmark brand-lockup" href="#home" aria-label="Clivelle home"><img class="brand-logo" src="./clivelle-logo.svg" alt="Clivelle — Shop smart, live stylish"></a>
+      <label class="search-box header-search" id="searchBox"><span>⌕</span><input id="searchInput" placeholder="Search for claw clips, scrunchies, hairbands..." aria-label="Search products"><button type="button" id="searchTrigger" aria-label="Search">⌕</button></label>
+      <div class="header-actions">
+        <button class="icon-button account-trigger" id="accountTrigger" aria-label="My account">♙<small>Account</small></button>
+        <button class="icon-button" id="headerWishlist" aria-label="Wishlist">♡<small>Wishlist</small></button>
+        <button class="icon-button bag-trigger" id="bagTrigger" aria-label="Shopping bag">♧<small>Cart</small><span class="bag-count" id="bagCount">0</span></button>
+      </div>
     </div>
+    <nav class="main-nav" id="mainNav">
+      <a href="#shop">New Arrivals</a><a href="#shop" data-filter="Claw clips">Claw Clips</a><a href="#shop" data-filter="Scrunchies">Scrunchies</a><a href="#shop" data-filter="Hairbands">Hair Bands</a><a href="#shop" data-filter="Hair clips">Hair Clips</a><a href="#shop">Hair Accessories</a><a href="#clivelle-extras">Gift Sets</a><a href="#clivelle-extras">Build Your Bundle</a><a href="#shop">Offers</a>
+    </nav>
   </header>
   <main>
-    <section class="hero fashion-hero" id="home"><div class="hero-copy"><div class="hero-mini-brand"><img src="./clivelle-icon.svg" alt=""><span>CLIVELLE <small>HAIR ACCESSORIES · LITTLE JOYS</small></span></div><p class="eyebrow">A LITTLE POP OF PRETTY</p><h1>Good hair days.<br><em>Every day.</em></h1><p class="hero-desc">Meet your new favourite claw clips, pretty hairbands, playful clips and soft scrunchies — made for every little moment.</p><a class="button button-dark" href="#shop">Shop hair accessories <span>↗</span></a><div class="hero-note">✦ CUTE · COLOURFUL · MADE TO BE YOUR FAVOURITE</div></div><div class="hero-image fashion-hero-image" role="img" aria-label="Colourful hair accessories collection"><div class="hero-sticker sticker-one">A LITTLE<br><b>EXTRA CUTE</b> ✦</div><div class="hero-tag">Your hair,<br>your happy place <span>✳</span></div></div><aside class="hero-promos" aria-label="Featured collections"><a class="hero-promo promo-arrivals" href="#shop"><img src="./marigold-barrette.svg" alt="Marigold floral hair barrette"><span><b>New Arrivals</b><small>Fresh styles just for you</small><em>Explore ↗</em></span></a><a class="hero-promo promo-bundle" href="#clivelle-extras"><img src="./petal-clip.svg" alt="Petal hair clip bundle"><span><b>Build Your Bundle</b><small>Pick 3 or more and save 10%</small><em>Create bundle ↗</em></span></a><a class="hero-promo promo-gift" href="#clivelle-extras"><img src="./pearl-headband.svg" alt="Pearl headband gift idea"><span><b>Gift Box</b><small>Make it extra special</small><em>Shop gifts ↗</em></span></a></aside></section>
-<section class="category-ribbon fashion-categories" aria-label="Shop hair accessories"><a href="#shop" data-filter="Claw clips"><img class="category-photo" src="./rosewood-claw.svg" alt="Claw clip product"><span class="category-icon cat-pink">✿</span><b>Claw clips</b><small>Hold it cute</small></a><a href="#shop" data-filter="Hairbands"><img class="category-photo" src="./pearl-headband.svg" alt="Pearl hairband product"><span class="category-icon cat-blue">♡</span><b>Hairbands</b><small>Everyday pretty</small></a><a href="#shop" data-filter="Hair clips"><img class="category-photo" src="./marigold-barrette.svg" alt="Flower hair clip product"><span class="category-icon cat-orange">✦</span><b>Hair clips</b><small>Little details</small></a><a href="#shop" data-filter="Scrunchies"><img class="category-photo" src="./ribbon-scrunchie.svg" alt="Satin scrunchie product"><span class="category-icon cat-purple">❀</span><b>Scrunchies</b><small>Soft on your hair</small></a></section>
+    <section class="hero fashion-hero" id="home"><div class="hero-copy"><div class="hero-mini-brand"><img src="./clivelle-icon.svg" alt=""><span>CLIVELLE <small>HAIR ACCESSORIES · LITTLE JOYS</small></span></div><p class="eyebrow">TRENDY HAIR ACCESSORIES FOR EVERY MOOD</p><h1>Express Your Style <em>Everyday.</em></h1><p class="hero-desc">Pretty claw clips, scrunchies, hair bands and little details that make every day feel special.</p><a class="button button-dark" href="#shop">Shop Now <span>→</span></a><div class="hero-note">Small details. Big confidence.</div></div><div class="hero-image fashion-hero-image" role="img" aria-label="Clivelle hair accessories editorial"><div class="hero-tag">Small Details. <b>Big Confidence.</b></div></div><aside class="hero-promos" aria-label="Featured collections">
+<a class="hero-promo promo-arrivals" href="#shop"><img src="./marigold-barrette.svg" alt="Floral hair clips"><span><b>New Arrivals</b><small>Fresh styles just for you</small><em>Explore →</em></span></a>
+<a class="hero-promo promo-bundle" href="#clivelle-extras"><img src="./petal-clip.svg" alt="Hair clip bundle"><span><b>Build Your Own Bundle</b><small>Pick any 3 or more &amp; get 10% OFF</small><em>Create Bundle →</em></span></a>
+<a class="hero-promo promo-gift" href="#clivelle-extras"><img src="./pearl-headband.svg" alt="Gift set"><span><b>Gift Box</b><small>Make it extra special</small><em>Shop Gifts →</em></span></a>
+</aside></section>
+<section class="category-ribbon fashion-categories" aria-label="Shop by category">
+<a href="#shop" data-filter="Claw clips"><img class="category-photo" src="./rosewood-claw.svg" alt="Claw clips"><b>Claw Clips</b></a>
+<a href="#shop" data-filter="Scrunchies"><img class="category-photo" src="./ribbon-scrunchie.svg" alt="Scrunchies"><b>Scrunchies</b></a>
+<a href="#shop" data-filter="Hairbands"><img class="category-photo" src="./pearl-headband.svg" alt="Hair bands"><b>Hair Bands</b></a>
+<a href="#shop" data-filter="Hair clips"><img class="category-photo" src="./petal-clip.svg" alt="Hair clips"><b>Hair Clips</b></a>
+<a href="#shop" data-filter="Hair clips"><img class="category-photo" src="./marigold-barrette.svg" alt="Hair accessories"><b>Hair Accessories</b></a>
+<a href="#clivelle-extras"><img class="category-photo" src="./sunday-headband.svg" alt="Gift sets"><b>Gift Sets</b></a>
+</section>
+<section class="trust-strip"><span>♧ Wide Range of Hair Accessories</span><span>✧ Trendy &amp; Stylish Designs</span><span>▣ Secure Payments</span><span>🚚 Fast &amp; Reliable Delivery</span><span>◷ Easy Returns</span><span>♡ Loved by 1000+ Customers</span></section>
+<section class="feature-banners" aria-label="Discover Clivelle">
+<a class="feature-banner banner-bundle" href="#clivelle-extras"><span><b>Build Your Own Bundle</b><small>Pick your favourite styles and get 10% OFF</small><em>Create Bundle →</em></span><img src="./petal-clip.svg" alt="Colourful hair clip bundle"></a>
+<a class="feature-banner banner-finder" href="#clivelle-extras"><span><b>Find Your Perfect Hair Accessory</b><small>Take our quick quiz and get personalised recommendations</small><em>Take the Quiz →</em></span><img src="./hero-editorial.svg" alt="Hair accessory style inspiration"></a>
+<a class="feature-banner banner-colour" href="#clivelle-extras"><span><b>Colour Finder</b><small>Find accessories in your favourite colour</small><em>Explore Colours →</em></span><img src="./mauve-claw.svg" alt="Colourful accessory selection"></a>
+</section>
     <section class="trust-strip"><span>✓ Pretty everyday accessories</span><span>↗ Fast & reliable delivery</span><span>♡ Secure demo shopping</span><span>✦ Little styles, lots of joy</span></section>
     <section class="collection section-wrap" id="shop">
-      <div class="section-heading"><div><p class="eyebrow">THE LITTLE THINGS YOU LOVE</p><h2>Hair favourites <em>right now.</em></h2></div><a class="text-link" href="#shop" id="viewAll">View all styles <span>↗</span></a></div>
-      <div class="filter-row" id="filterRow"><button class="filter-chip active" data-filter="All">All</button><button class="filter-chip" data-filter="Claw clips">Claw clips</button><button class="filter-chip" data-filter="Hairbands">Hairbands</button><button class="filter-chip" data-filter="Hair clips">Hair clips</button><button class="filter-chip" data-filter="Scrunchies">Scrunchies</button><label class="search-box" id="searchBox"><span>⌕</span><input id="searchInput" placeholder="Search clips, bands, scrunchies" aria-label="Search products"></label></div>
+      <div class="section-heading"><div><p class="eyebrow">THE CLIVELLE EDIT</p><h2>Trending <em>Now</em></h2></div><a class="text-link" href="#shop" id="viewAll">View All →</a></div>
+      <div class="filter-row" id="filterRow"><button class="filter-chip active" data-filter="All">All</button><button class="filter-chip" data-filter="Claw clips">Claw Clips</button><button class="filter-chip" data-filter="Scrunchies">Scrunchies</button><button class="filter-chip" data-filter="Hairbands">Hair Bands</button><button class="filter-chip" data-filter="Hair clips">Hair Clips</button></div>
       <div class="product-grid" id="productGrid"></div>
       <div class="empty-state" id="emptyState" hidden>No pieces found. Try another search.</div>
     </section>
