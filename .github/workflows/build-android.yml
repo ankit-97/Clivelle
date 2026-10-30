@@ -9,6 +9,7 @@ on:
       - 'styles.css'
       - 'app.js'
       - '*.svg'
+      - '*.png'
       - 'package.json'
       - 'capacitor.config.json'
       - 'scripts/**'
