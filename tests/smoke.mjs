@@ -102,12 +102,15 @@ try {
   await page.locator('.mobile-tabbar a').filter({ hasText: 'Wishlist' }).click();
   assert.equal(await page.locator('#wishlistItems .wishlist-item').count(), 1, 'wishlist saves and displays a product');
   await page.locator('#wishlistModal [data-close]').click();
-  await page.locator('.mobile-tabbar a').filter({ hasText: 'Orders' }).click();
-  assert.equal(await page.locator('#ordersList .history-item').count(), 1, 'order history displays the placed demo order');
-  await page.locator('#ordersModal [data-close]').click();
+  await page.locator('.mobile-tabbar a').filter({ hasText: 'Bundle' }).click();
+  assert.ok(await page.locator('#clivelle-extras').isVisible(), 'bundle tab opens the feature section');
+  await page.locator('.mobile-tabbar a').filter({ hasText: 'Wishlist' }).click();
+  assert.equal(await page.locator('#wishlistItems .wishlist-item').count(), 1, 'wishlist tab opens saved products');
+  await page.locator('#wishlistModal [data-close]').click();
   await page.locator('#mobileAccount').click();
   assert.equal(await page.locator('#accountModal.open').count(), 1, 'account screen opens from mobile navigation');
   assert.match(await page.locator('#accountDetails').textContent(), /Clivelle Tester/);
+  assert.equal(await page.locator('#orderHistory .history-item').count(), 1, 'account contains the placed demo order');
   await page.locator('#accountModal [data-close]').click();
   await page.locator('#copyReferral').click();
   assert.deepEqual(errors, [], 'no uncaught JavaScript errors during website flow');
