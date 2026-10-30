@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 
 const browser = await chromium.launch({ headless: true });
 const errors = [];
+// Regression coverage for shared responsive homepage interactions.
 try {
   const context = await browser.newContext({ viewport: { width: 1280, height: 900 } });
   const page = await context.newPage();
