@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 620 170" role="img" aria-labelledby="title">
+<title id="title">Clivelle</title>
+<defs>
+ <linearGradient id="bag" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#ffbd3f"/><stop offset=".36" stop-color="#ff398b"/><stop offset=".7" stop-color="#8a32ff"/><stop offset="1" stop-color="#00aeea"/></linearGradient>
+ <linearGradient id="shine" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#ffdd69"/><stop offset="1" stop-color="#ff4d9b"/></linearGradient>
+</defs>
+<g transform="translate(8 5)">
+ <path d="M45 58V43c0-25 18-39 39-39s39 14 39 39v15" fill="none" stroke="url(#shine)" stroke-width="13" stroke-linecap="round"/>
+ <path d="M25 57h118l14 92H11z" rx="16" fill="url(#bag)"/>
+ <path d="M25 57h118l14 92H11z" fill="url(#bag)" opacity=".96"/>
+ <path d="M82 75c-20 0-33 13-33 32 0 19 13 31 33 31 12 0 22-5 28-14l-17-12c-3 4-6 6-11 6-8 0-13-5-13-12s5-12 13-12c5 0 8 2 11 6l17-12c-6-9-16-13-28-13z" fill="#fff"/>
+ <path d="M152 43l6 13 13 6-13 6-6 13-6-13-13-6 13-6z" fill="#ff4d9b"/>
+</g>
+<text x="190" y="105" font-family="Poppins, Arial, sans-serif" font-size="76" font-weight="700" letter-spacing="-4" fill="#101b4c">Clivelle</text>
+<path d="M195 125h275" stroke="#d8d8e8" stroke-width="2"/>
+<text x="196" y="151" font-family="Arial, sans-serif" font-size="14" font-weight="600" letter-spacing="5" fill="#27325a">SHOP SMART · LIVE STYLISH</text>
+</svg>
