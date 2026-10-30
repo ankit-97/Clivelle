@@ -8,6 +8,8 @@ on:
       - 'styles.css'
       - 'manifest.webmanifest'
       - 'service-worker.js'
+      - '*.png'
+      - 'scripts/copy-web.js'
       - 'tests/**'
       - '.github/workflows/test-app.yml'
   workflow_dispatch:
