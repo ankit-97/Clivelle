@@ -1,0 +1,8 @@
+{
+  "appId": "in.clivelle.shop",
+  "appName": "Clivelle",
+  "webDir": "www",
+  "server": {
+    "androidScheme": "https"
+  }
+}
