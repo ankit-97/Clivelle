@@ -1,17 +1,18 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 620 170" role="img" aria-labelledby="title">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 780 220" role="img" aria-labelledby="title">
 <title id="title">Clivelle</title>
 <defs>
- <linearGradient id="bag" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#ffbd3f"/><stop offset=".36" stop-color="#ff398b"/><stop offset=".7" stop-color="#8a32ff"/><stop offset="1" stop-color="#00aeea"/></linearGradient>
- <linearGradient id="shine" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#ffdd69"/><stop offset="1" stop-color="#ff4d9b"/></linearGradient>
+ <linearGradient id="bag" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#ffca35"/><stop offset=".28" stop-color="#ff4d8d"/><stop offset=".62" stop-color="#8b20ed"/><stop offset="1" stop-color="#00c2ff"/></linearGradient>
+ <linearGradient id="handle" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#ff4d8d"/><stop offset=".55" stop-color="#8b20ed"/><stop offset="1" stop-color="#ff9a35"/></linearGradient>
+ <linearGradient id="spark" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#ff8ec5"/><stop offset="1" stop-color="#ff2d91"/></linearGradient>
 </defs>
-<g transform="translate(8 5)">
- <path d="M45 58V43c0-25 18-39 39-39s39 14 39 39v15" fill="none" stroke="url(#shine)" stroke-width="13" stroke-linecap="round"/>
- <path d="M25 57h118l14 92H11z" rx="16" fill="url(#bag)"/>
- <path d="M25 57h118l14 92H11z" fill="url(#bag)" opacity=".96"/>
- <path d="M82 75c-20 0-33 13-33 32 0 19 13 31 33 31 12 0 22-5 28-14l-17-12c-3 4-6 6-11 6-8 0-13-5-13-12s5-12 13-12c5 0 8 2 11 6l17-12c-6-9-16-13-28-13z" fill="#fff"/>
- <path d="M152 43l6 13 13 6-13 6-6 13-6-13-13-6 13-6z" fill="#ff4d9b"/>
+<g transform="translate(10 8) scale(.98)">
+ <path d="M87 82V51c0-37 25-61 57-61s57 24 57 61v31" fill="none" stroke="url(#handle)" stroke-width="20" stroke-linecap="round"/>
+ <path d="M42 75q4-15 22-15h158q19 0 22 17l24 145q4 25-24 25H45q-28 0-24-26z" fill="url(#bag)"/>
+ <path d="M137 99c-42 0-70 27-70 65s28 65 70 65c25 0 44-10 57-29l-37-26c-5 8-12 12-21 12-15 0-25-10-25-22s10-22 25-22c9 0 16 4 21 12l37-26c-13-19-32-29-57-29z" fill="#fff"/>
+ <path d="M220 116l11 23 23 11-23 11-11 23-11-23-23-11 23-11z" fill="url(#spark)"/>
 </g>
-<text x="190" y="105" font-family="Poppins, Arial, sans-serif" font-size="76" font-weight="700" letter-spacing="-4" fill="#101b4c">Clivelle</text>
-<path d="M195 125h275" stroke="#d8d8e8" stroke-width="2"/>
-<text x="196" y="151" font-family="Arial, sans-serif" font-size="14" font-weight="600" letter-spacing="5" fill="#27325a">SHOP SMART · LIVE STYLISH</text>
+<text x="285" y="153" font-family="Poppins,Arial,sans-serif" font-size="115" font-weight="800" letter-spacing="-7" fill="#101b4c">Clivelle</text>
+<path d="M299 174h385" stroke="#e5e3ed" stroke-width="2"/>
+<text x="301" y="203" font-family="Poppins,Arial,sans-serif" font-size="16" font-weight="600" letter-spacing="7" fill="#263153">SHOP SMART · LIVE STYLISH</text>
+<path d="M355 46l7 15 15 7-15 7-7 15-7-15-15-7 15-7z" fill="#ff2d91"/>
 </svg>
