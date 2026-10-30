@@ -16,7 +16,13 @@
   ],
   "icons": [
     {
-      "src": "./clivelle-icon.svg",
+      "src": "./apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "./clivelle-icon.svg?v=5",
       "sizes": "any",
       "type": "image/svg+xml",
       "purpose": "any"
