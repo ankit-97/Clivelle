@@ -91,6 +91,8 @@ try {
   await page.locator('#addBundle').click();
   await page.locator('#authName').fill('Clivelle Tester');
   await page.locator('#authPhone').fill('9876543210');
+  await page.locator('#signupPassword').fill('ClivelleTest123!');
+  await page.locator('#signupConfirmPassword').fill('ClivelleTest123!');
   await page.locator('#acceptTerms').check();
   await page.locator('#authForm button').click();
   await page.locator('#bagDrawer.open').waitFor({ timeout: 5000 });
