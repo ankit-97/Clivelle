@@ -6,7 +6,7 @@ Node.js 20+ / Express API for the Clivelle website and Capacitor app.
 
 The production start command is `npm start`. If `DATABASE_URL` is present, `src/start.js` starts `src/postgres-server.js`; otherwise it starts the original SQL Server implementation.
 
-On Render, set the Root Directory to `backend`, Build Command to `npm run render:build`, and Start Command to `npm start`. The `render:build` script installs production dependencies while omitting optional native ODBC drivers; the PostgreSQL deployment does not use them. For local Windows-auth SQL Server development only, install the optional driver with `npm install --include=optional`.
+On Render, set the Root Directory to `backend`, Build Command to `npm run render:build`, and Start Command to `npm start`. The `render:build` script installs production dependencies while omitting optional native ODBC drivers; the PostgreSQL deployment does not use them. For local Windows-auth SQL Server development only, install the optional driver with `npm install --include=optional`. In production, the start script always selects PostgreSQL and fails with a clear `DATABASE_URL is required` message if the connection string is missing; it never falls back to the SQL Server/ODBC implementation.
 
 Configure these Render environment variables (use the Render PostgreSQL **Internal Database URL** when the API service and database are in the same Render region):
 
