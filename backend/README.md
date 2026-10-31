@@ -10,7 +10,7 @@ Configure these Render environment variables (use the Render PostgreSQL **Intern
 
 - `DATABASE_URL` — required PostgreSQL connection string. Keep it private.
 - `NODE_ENV=production`
-- `CORS_ORIGINS=https://ankit-97.github.io,https://clivelle.onrender.com` — add every real storefront origin, comma-separated.
+- `CORS_ORIGINS=https://ankit-97.github.io,https://clivelle.onrender.com,capacitor://localhost` — add every real storefront origin, comma-separated.
 - `TRUST_PROXY=1`
 - `DB_POOL_MAX=10`
 
