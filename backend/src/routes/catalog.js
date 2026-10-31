@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import sql from 'mssql';
+import sql from 'mssql/msnodesqlv8.js';
 import { z } from 'zod';
 import { getPool } from '../database.js';
 
