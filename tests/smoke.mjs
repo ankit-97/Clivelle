@@ -7,6 +7,33 @@ const errors = [];
 try {
   const context = await browser.newContext({ viewport: { width: 1280, height: 900 } });
   const page = await context.newPage();
+  // Keep browser regression tests deterministic and independent of a live Render database.
+  let mockCart = [], mockAddresses = [], mockOrders = [];
+  const mockUser = { id: '00000000-0000-4000-8000-000000000001', fullName: 'Clivelle Tester', email: null, phone: '+919876543210' };
+  await page.route('http://127.0.0.1:4000/api/v1/**', async route => {
+    const request = route.request(), method = request.method(), url = new URL(request.url()), path = url.pathname;
+    let data = {}, status = 200;
+    if (path.endsWith('/auth/signup') && method === 'POST') { data = { token: 'test-session-token', user: mockUser }; status = 201; }
+    else if (path.endsWith('/auth/me') && method === 'GET') data = { user: mockUser };
+    else if (path.endsWith('/auth/signout') && method === 'POST') data = { signedOut: true };
+    else if (path.endsWith('/customer/cart') && method === 'GET') data = mockCart;
+    else if (path.endsWith('/customer/cart/items') && method === 'PUT') {
+      const item = request.postDataJSON(); const existing = mockCart.find(x => x.slug === item.productId);
+      if (existing) existing.quantity = item.quantity; else mockCart.push({ slug: item.productId, quantity: item.quantity });
+      data = mockCart;
+    } else if (path.includes('/customer/cart/items/') && method === 'DELETE') {
+      const slug = decodeURIComponent(path.split('/').pop()); mockCart = mockCart.filter(x => x.slug !== slug); data = mockCart;
+    } else if (path.endsWith('/customer/addresses') && method === 'GET') data = mockAddresses;
+    else if (path.endsWith('/customer/addresses') && method === 'POST') {
+      const a = request.postDataJSON(), saved = { id: '00000000-0000-4000-8000-000000000002', name: a.recipientName, recipientName: a.recipientName, phone: a.phone, street: a.line1, area: a.locality, city: a.city, state: a.state, pin: a.pin, type: a.type, default: true };
+      mockAddresses = [saved]; data = saved; status = 201;
+    } else if (path.endsWith('/customer/orders') && method === 'GET') data = mockOrders;
+    else if (path.endsWith('/customer/orders') && method === 'POST') {
+      const order = { id: '00000000-0000-4000-8000-000000000003', orderNumber: 'CLV-TEST-001', status: 'placed', total: 899, placedAt: new Date().toISOString() };
+      mockOrders.push(order); mockCart = []; data = order; status = 201;
+    }
+    await route.fulfill({ status, contentType: 'application/json', body: JSON.stringify({ data }) });
+  });
   page.on('pageerror', e => errors.push(e.message));
   await page.goto('http://127.0.0.1:4173/', { waitUntil: 'networkidle' });
   await page.waitForFunction(async () => { const reg = await navigator.serviceWorker?.getRegistration(); return !!reg?.active && reg.active.state === 'activated'; }, { timeout: 15000 });
