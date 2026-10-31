@@ -32,7 +32,7 @@ function clearSessionCookie(res) {
 }
 function readToken(req) {
   const authorization = req.get('authorization') || '';
-  const bearer = authorization.match(/^Bearer\\s+([A-Za-z0-9_-]+)$/i)?.[1];
+  const bearer = authorization.match(/^Bearer\s+([A-Za-z0-9_-]+)$/i)?.[1];
   if (bearer) return bearer;
   return req.headers.cookie?.split(';').map(part => part.trim()).find(part => part.startsWith('clivelle_session='))?.slice('clivelle_session='.length) || null;
 }
