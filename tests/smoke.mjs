@@ -93,6 +93,7 @@ try {
   await page.locator('#authPhone').fill('9876543210');
   await page.locator('#acceptTerms').check();
   await page.locator('#authForm button').click();
+  await page.locator('#bagDrawer.open').waitFor({ timeout: 5000 });
   assert.equal(await page.locator('#bagDrawer.open').count(), 1, 'bundle opens bag after sign-in');
   assert.match(await page.locator('#bagSubtotal').innerText(), /538/, '10 percent bundle saving reaches bag total');
   await page.locator('.bag-row').first().locator('[data-delta="1"]').click();
