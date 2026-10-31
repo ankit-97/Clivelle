@@ -9,14 +9,14 @@ export const customerRouter = Router();
 const cartItemSchema = z.object({ productId: z.string().trim().min(1).max(160), quantity: z.coerce.number().int().min(1).max(99) });
 const addressSchema = z.object({
   recipientName: z.string().trim().min(2).max(120),
-  phone: z.string().trim().regex(/^[6-9]\\d{9}$/),
+  phone: z.string().trim().regex(/^[6-9]\d{9}$/),
   line1: z.string().trim().min(2).max(200),
   line2: z.string().trim().max(200).optional().default(''),
   locality: z.string().trim().min(2).max(120),
   landmark: z.string().trim().max(120).optional().default(''),
   city: z.string().trim().min(2).max(100),
   state: z.string().trim().min(2).max(100),
-  pin: z.string().trim().regex(/^[1-9]\\d{5}$/),
+  pin: z.string().trim().regex(/^[1-9]\d{5}$/),
   type: z.enum(['home', 'work', 'other']).default('home'),
   isDefault: z.boolean().default(false)
 });
