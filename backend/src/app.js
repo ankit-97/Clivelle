@@ -68,6 +68,12 @@ app.use((error, _req, res, _next) => {
   if (error instanceof SyntaxError && 'body' in error) {
     return res.status(400).json({ error: { code: 'INVALID_JSON', message: 'Request body must be valid JSON.' } });
   }
+  if (error.apiCode === 'DATABASE_NOT_CONFIGURED') {
+    return res.status(503).json({ error: { code: error.apiCode, message: 'The catalog is temporarily unavailable.' } });
+  }
+  if (error.apiCode === 'DATABASE_UNAVAILABLE') {
+    return res.status(503).json({ error: { code: error.apiCode, message: 'The catalog is temporarily unavailable.' } });
+  }
   console.error('Unhandled API error:', error);
   return res.status(500).json({ error: { code: 'INTERNAL_ERROR', message: 'Something went wrong.' } });
 });

@@ -9,18 +9,21 @@ export function isDatabaseConfigured() {
 
 export async function getPool() {
   if (!isDatabaseConfigured()) {
-    throw new Error('Database is not configured. Set DB_SERVER and DB_NAME; SQL authentication also requires DB_USER and DB_PASSWORD.');
+    const error = new Error('Database is not configured. Set DB_SERVER and DB_NAME; SQL authentication also requires DB_USER and DB_PASSWORD.');
+    error.apiCode = 'DATABASE_NOT_CONFIGURED';
+    throw error;
   }
   if (!poolPromise) {
     const connection = config.DB_AUTH === 'windows'
       ? {
-          server: config.DB_SERVER,
-          database: config.DB_NAME,
-          driver: 'ODBC Driver 18 for SQL Server',
-          options: {
-            trustedConnection: true,
-            trustServerCertificate: config.DB_TRUST_SERVER_CERTIFICATE === 'true'
-          }
+          connectionString: [
+            `Driver={${config.DB_ODBC_DRIVER}}`,
+            `Server=${config.DB_SERVER}${config.DB_PORT === 1433 ? '' : `,${config.DB_PORT}`}`,
+            `Database=${config.DB_NAME}`,
+            'Trusted_Connection=Yes',
+            `Encrypt=${config.DB_ENCRYPT === 'true' ? 'Yes' : 'No'}`,
+            `TrustServerCertificate=${config.DB_TRUST_SERVER_CERTIFICATE === 'true' ? 'Yes' : 'No'}`
+          ].join(';') + ';'
         }
       : {
           server: config.DB_SERVER,
@@ -42,6 +45,7 @@ export async function getPool() {
     });
     poolPromise = pool.connect().catch((error) => {
       poolPromise = undefined;
+      error.apiCode = 'DATABASE_UNAVAILABLE';
       throw error;
     });
   }
