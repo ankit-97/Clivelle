@@ -334,6 +334,7 @@ body{font-family:'Poppins','DM Sans',sans-serif;color:var(--clv-ink);background:
  background-position:var(--photo-x,0%) var(--photo-y,0%);
  background-repeat:no-repeat;
 }
+.category-photo{display:block;background-size:cover;background-position:center;background-repeat:no-repeat}
 .hero.fashion-hero{
  display:grid;
  grid-template-columns:minmax(0,1.02fr) minmax(0,1fr) minmax(230px,.60fr);
