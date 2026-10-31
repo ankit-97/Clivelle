@@ -336,6 +336,15 @@ body{font-family:'Poppins','DM Sans',sans-serif;color:var(--clv-ink);background:
 }
 .category-photo{display:block;background-size:cover!important;background-position:center!important;background-repeat:no-repeat!important}
 .promo-photo{display:block;background-size:cover;background-position:center;background-repeat:no-repeat}
+.category-ribbon a:nth-child(1) .category-photo{background-image:url('./rosewood-claw.jpg?v=assets-2')!important}
+.category-ribbon a:nth-child(2) .category-photo{background-image:url('./ribbon-scrunchie.jpg?v=assets-2')!important}
+.category-ribbon a:nth-child(3) .category-photo{background-image:url('./pearl-headband.jpg?v=assets-2')!important}
+.category-ribbon a:nth-child(4) .category-photo{background-image:url('./petal-clip.jpg?v=assets-2')!important}
+.category-ribbon a:nth-child(5) .category-photo{background-image:url('./marigold-barrette.jpg?v=assets-2')!important}
+.category-ribbon a:nth-child(6) .category-photo{background-image:url('./clivelle-hero-launch.jpg?v=assets-2')!important}
+.hero-promo.promo-arrivals .promo-photo{background-image:url('./marigold-barrette.jpg?v=assets-2')!important}
+.hero-promo.promo-bundle .promo-photo{background-image:url('./rosewood-claw.jpg?v=assets-2')!important}
+.hero-promo.promo-gift .promo-photo{background-image:url('./clivelle-hero-launch.jpg?v=assets-2')!important}
 .hero.fashion-hero{
  display:grid;
  grid-template-columns:minmax(0,1.02fr) minmax(0,1fr) minmax(230px,.60fr);
