@@ -7,6 +7,7 @@ import { checkDatabase, isDatabaseConfigured } from './database.js';
 import { catalogRouter } from './routes/catalog.js';
 import { authRouter } from './routes/auth.js';
 import { customerRouter } from './routes/customer.js';
+import { communityRouter } from './routes/community.js';
 
 export const app = express();
 app.disable('x-powered-by');
@@ -14,6 +15,7 @@ if (config.TRUST_PROXY === '1') app.set('trust proxy', 1);
 
 app.use(helmet());
 app.use(cors({
+  credentials: true,
   origin(origin, callback) {
     if (!origin || config.corsOrigins.includes(origin)) return callback(null, true);
     return callback(new Error('Origin is not allowed by CORS'));
@@ -48,6 +50,7 @@ app.get('/health/ready', async (_req, res) => {
 app.use(config.API_BASE_PATH, catalogRouter);
 app.use(`${config.API_BASE_PATH}/auth`, authRouter);
 app.use(`${config.API_BASE_PATH}/customer`, customerRouter);
+app.use(config.API_BASE_PATH, communityRouter);
 
 app.get(config.API_BASE_PATH, (_req, res) => {
   res.json({

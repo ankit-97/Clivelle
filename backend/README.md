@@ -30,22 +30,26 @@ Health checks:
 - `GET /api/v1/auth/me`, `POST /api/v1/auth/signout` — persistent, revocable 30-day sessions.
 - `GET /api/v1/customer/me` — current customer profile.
 - `GET /api/v1/customer/cart`, `PUT /api/v1/customer/cart/items`, `DELETE /api/v1/customer/cart/items/:id` — server-side cart.
-- `GET /api/v1/customer/addresses`, `POST /api/v1/customer/addresses` — saved delivery addresses.
-- `GET /api/v1/customer/orders`, `POST /api/v1/customer/orders` — persisted orders with idempotency protection and stock checks.
+- `GET /api/v1/customer/addresses`, `POST /api/v1/customer/addresses`, `PUT /api/v1/customer/addresses/:id`, `DELETE /api/v1/customer/addresses/:id` — saved delivery addresses.
+- `GET /api/v1/customer/wishlist`, `PUT /api/v1/customer/wishlist/:id`, `DELETE /api/v1/customer/wishlist/:id` — server-side wishlist.
+- `GET /api/v1/customer/orders`, `POST /api/v1/customer/orders` — persisted orders, item snapshots, idempotency protection and transactional stock checks.
+- `POST /api/v1/newsletter` — persistent newsletter subscriptions.
+- `GET /api/v1/reviews`, `POST /api/v1/reviews` — published reviews and customer submissions pending moderation.
 
 Authenticated requests accept `Authorization: Bearer <token>`. The browser storefront stores the issued session token locally and sends it on authenticated requests; do not log or share this token. Passwords are hashed with bcrypt. Session tokens are stored only as SHA-256 hashes in PostgreSQL.
 
 ## Important payment limitation
 
-Checkout currently creates and stores an order record and reserves/decrements catalogue stock. It does **not** collect money. A real payment provider (for example Razorpay) must be integrated with signed webhooks, payment status transitions, refunds and reconciliation before accepting live paid orders. Shipping labels, courier tracking, transactional email/SMS, admin roles and production-grade inventory reservation/expiry are also not enabled.
+Checkout currently supports **Cash on Delivery only** on the SQL Server API. COD orders, order-item snapshots, inventory movements and pending COD payment records are saved transactionally. UPI, cards and net banking are intentionally disabled until a real payment provider (for example Razorpay) is configured with signed webhooks, payment status transitions, refunds and reconciliation. Do not mark a test order as paid. Shipping labels, courier tracking, transactional email/SMS, admin roles and production-grade inventory reservation/expiry are also not enabled.
 
 ## Local setup
 
-1. Install Node.js 20 or newer.
-2. From this folder run `npm install`.
-3. For PostgreSQL testing, set `DATABASE_URL` in your local environment.
-4. Start with `npm run dev` (watch mode) or `npm start`.
-5. The browser app uses `http://localhost:4000/api/v1` on localhost. For another API host, define `window.CLIVELLE_API_BASE_URL` before loading `app.js`.
+1. Install Node.js 20 or newer and SQL Server ODBC Driver 18.
+2. Copy `.env.example` to `.env`; keep `DB_AUTH=windows`, set `DB_SERVER` and `DB_NAME=Clivelle` to your local instance.
+3. Run the schema migration and development seed scripts from the [Clivelle-Database repository](https://github.com/ankit-97/Clivelle-Database) against the `Clivelle` database.
+4. From this folder run `npm install`, then `npm run dev` (watch mode) or `npm start`.
+5. Verify `GET http://localhost:4000/health/ready` returns `{\"status\":\"ready\",\"database\":\"connected\"}`.
+6. Open the storefront locally and confirm `window.CLIVELLE_API_BASE_URL` points to `http://localhost:4000/api/v1`. For another API host, define it before loading `app.js`.
 
 The SQL Server fallback still uses the SQL Server schema in the separate [Clivelle-Database repository](https://github.com/ankit-97/Clivelle-Database). The PostgreSQL production path uses the schema in `src/postgres-server.js`.
 

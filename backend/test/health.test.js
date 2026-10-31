@@ -4,12 +4,8 @@ import request from 'supertest';
 import { app } from '../src/app.js';
 
 let server;
-before(() => {
-  server = app.listen(0);
-});
-after((done) => {
-  server.close(done);
-});
+before(() => { server = app.listen(0); });
+after(done => { server.close(done); });
 
 test('liveness endpoint responds without requiring SQL Server', async () => {
   const response = await request(server).get('/health/live');
@@ -48,8 +44,7 @@ test('catalog reports unavailable when SQL Server is not configured', async () =
 });
 
 test('CORS allows the local storefront origin', async () => {
-  const response = await request(server)
-    .options('/api/v1/products')
+  const response = await request(server).options('/api/v1/products')
     .set('Origin', 'http://127.0.0.1:4173')
     .set('Access-Control-Request-Method', 'GET');
   assert.equal(response.status, 204);
@@ -62,16 +57,35 @@ test('CORS rejects unconfigured browser origins', async () => {
   assert.equal(response.body.error.code, 'ORIGIN_NOT_ALLOWED');
 });
 
-test('OTP request validates input and reports missing providers safely', async () => {
-  const invalid = await request(server).post('/api/v1/auth/otp/request').send({ channel: 'sms', destination: 'bad' });
-  assert.equal(invalid.status, 400);
-  const unavailable = await request(server).post('/api/v1/auth/otp/request').send({ channel: 'email', destination: 'tester@example.com' });
-  assert.equal(unavailable.status, 503);
-  assert.equal(unavailable.body.error.code, 'OTP_PROVIDER_NOT_CONFIGURED');
+test('signup validates identity and password before contacting the database', async () => {
+  const response = await request(server).post('/api/v1/auth/signup')
+    .send({ fullName: 'A', email: '', phone: '', password: 'short', confirmPassword: 'short' });
+  assert.equal(response.status, 400);
+  assert.equal(response.body.error.code, 'INVALID_SIGNUP');
 });
 
-test('customer resources require an authenticated session', async () => {
-  const response = await request(server).get('/api/v1/customer/cart');
-  assert.equal(response.status, 401);
-  assert.equal(response.body.error.code, 'AUTH_REQUIRED');
+test('sign-in validates the identifier and password before contacting the database', async () => {
+  const response = await request(server).post('/api/v1/auth/signin')
+    .send({ identifier: 'bad', password: 'short' });
+  assert.equal(response.status, 400);
+  assert.equal(response.body.error.code, 'INVALID_SIGNIN');
+});
+
+test('customer resources require a valid persisted session', async () => {
+  const [cart, addresses, orders, wishlist] = await Promise.all([
+    request(server).get('/api/v1/customer/cart'),
+    request(server).get('/api/v1/customer/addresses'),
+    request(server).get('/api/v1/customer/orders'),
+    request(server).get('/api/v1/customer/wishlist')
+  ]);
+  for (const response of [cart, addresses, orders, wishlist]) {
+    assert.equal(response.status, 401);
+    assert.equal(response.body.error.code, 'AUTH_REQUIRED');
+  }
+});
+
+test('newsletter rejects invalid email without a database connection', async () => {
+  const response = await request(server).post('/api/v1/newsletter').send({ email: 'not-an-email' });
+  assert.equal(response.status, 400);
+  assert.equal(response.body.error.code, 'INVALID_EMAIL');
 });
