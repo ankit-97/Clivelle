@@ -7,6 +7,7 @@ const schema = z.object({
   API_BASE_PATH: z.string().regex(/^\/[a-zA-Z0-9/_-]+$/).default('/api/v1'),
   CORS_ORIGINS: z.string().default('http://localhost:3000,http://localhost:5173,http://127.0.0.1:5500'),
   TRUST_PROXY: z.enum(['0', '1']).default('0'),
+  DB_AUTH: z.enum(['sql', 'windows']).default('sql'),
   DB_SERVER: z.string().optional(),
   DB_PORT: z.coerce.number().int().min(1).max(65535).default(1433),
   DB_NAME: z.string().optional(),
@@ -28,5 +29,5 @@ if (!parsed.success) {
 export const config = Object.freeze({
   ...parsed.data,
   corsOrigins: parsed.data.CORS_ORIGINS.split(',').map((origin) => origin.trim()).filter(Boolean),
-  databaseConfigured: Boolean(parsed.data.DB_SERVER && parsed.data.DB_NAME && parsed.data.DB_USER && parsed.data.DB_PASSWORD)
+  databaseConfigured: Boolean(parsed.data.DB_SERVER && parsed.data.DB_NAME && (parsed.data.DB_AUTH === 'windows' || (parsed.data.DB_USER && parsed.data.DB_PASSWORD)))
 });
