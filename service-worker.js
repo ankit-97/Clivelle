@@ -10,18 +10,18 @@ const APP_SHELL = [
   "clivelle-icon.svg",
   "clivelle-home-icon-v9.png?rev=10",
   "clivelle-logo.svg",
-  "clivelle-photo-grid.svg",
+  "clivelle-photo-grid.jpg",
   "clivelle-hero-launch.jpg",
-  "hero-editorial.svg",
-  "story-editorial.svg",
-  "cloud-scrunchie.svg",
-  "marigold-barrette.svg",
-  "mauve-claw.svg",
-  "pearl-headband.svg",
-  "petal-clip.svg",
-  "ribbon-scrunchie.svg",
-  "rosewood-claw.svg",
-  "sunday-headband.svg"
+  "hero-editorial.jpg",
+  "story-editorial.jpg",
+  "cloud-scrunchie.jpg",
+  "marigold-barrette.jpg",
+  "mauve-claw.jpg",
+  "pearl-headband.jpg",
+  "petal-clip.jpg",
+  "ribbon-scrunchie.jpg",
+  "rosewood-claw.jpg",
+  "sunday-headband.jpg"
 ].map((path) => new URL(path, BASE_URL).href);
 
 self.addEventListener("install", (event) => {
