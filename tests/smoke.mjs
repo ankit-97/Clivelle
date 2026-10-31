@@ -24,7 +24,7 @@ try {
   assert.ok(await page.locator('.product-card').count() >= 1, 'category shortcuts filter the product catalogue');
   await page.locator('#filterRow [data-filter="All"]').click();
   assert.equal(await page.locator('.product-card .clv-photo-crop').count(), 8, 'all eight catalogue products have photo crops');
-  const photoAtlas = await page.request.get('http://127.0.0.1:4173/clivelle-photo-grid.svg');
+  const photoAtlas = await page.request.get('http://127.0.0.1:4173/clivelle-photo-grid.jpg');
   assert.equal(photoAtlas.status(), 200, 'catalogue product photo atlas is served');
   assert.match(photoAtlas.headers()['content-type'] || '', /image\/svg\+xml/i, 'catalogue photo atlas is an SVG');
   assert.match(await page.locator('.hero-image').evaluate(el => getComputedStyle(el).backgroundImage), /images\.pexels\.com\/photos\/19879697/, 'hero displays the sharp editorial photo');
@@ -135,7 +135,7 @@ try {
   assert.equal(await appPage.locator('.feature-banners .feature-banner').count(), 3, 'installed app shares image-led feature banners');
   assert.ok(await appPage.locator('#searchBox #searchInput').isVisible(), 'installed app has a visible header search');
   assert.equal(await appPage.locator('.product-card .clv-photo-crop').count(), 8, 'installed app uses photo crops for all products');
-  const appAtlas = await appPage.request.get('http://127.0.0.1:4173/clivelle-photo-grid.svg');
+  const appAtlas = await appPage.request.get('http://127.0.0.1:4173/clivelle-photo-grid.jpg');
   assert.equal(appAtlas.status(), 200, 'installed app packages the same photo atlas');
   assert.match(await appPage.locator('.hero-image').evaluate(el => getComputedStyle(el).backgroundImage), /images\.pexels\.com\/photos\/19879697/, 'installed app displays the same hero photo');
   assert.equal(await appPage.locator('.mobile-tabbar').evaluate(el => getComputedStyle(el).position), 'fixed', 'mobile app has fixed bottom navigation');
@@ -167,7 +167,7 @@ try {
   }
   assert.equal(liveHome.status(), 200, 'published website responds');
   assert.ok(liveHtml.includes('clivelle-home-icon-v9.png?rev=10'), 'published page references the cache-busted iOS icon URL');
-  const liveAtlas = await livePage.request.get('https://ankit-97.github.io/Clivelle/clivelle-photo-grid.svg');
+  const liveAtlas = await livePage.request.get('https://ankit-97.github.io/Clivelle/clivelle-photo-grid.jpg');
   assert.equal(liveAtlas.status(), 200, 'published catalogue photo atlas responds');
   const liveHeroPhoto = await livePage.request.get('https://ankit-97.github.io/Clivelle/clivelle-hero-launch.jpg');
   assert.equal(liveHeroPhoto.status(), 200, 'published hero photo responds');
