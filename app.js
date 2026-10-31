@@ -19,6 +19,11 @@ function productPhoto(p,extraClass=''){if(p?.asset)return `<span class="clv-phot
 const read=(key,fallback)=>{try{return JSON.parse(localStorage.getItem('clivelle-'+key))??fallback}catch{return fallback}};
 const write=(key,value)=>{try{localStorage.setItem('clivelle-'+key,JSON.stringify(value));return true}catch(err){console.warn('Clivelle local storage limit:',err);toast('This device storage is full. Remove some saved demo data and try again.');return false}};
 const catalog=read('catalog',{}),deletedProducts=new Set(read('deletedProducts',[]));for(let i=products.length-1;i>=0;i--)if(deletedProducts.has(products[i].id))products.splice(i,1);products.forEach(p=>{if(catalog[p.id])Object.assign(p,catalog[p.id]);else p.stock=12});Object.values(catalog).forEach(p=>{if(['Claw clips','Hairbands','Hair clips','Scrunchies'].includes(p.category)&&!products.some(item=>item.id===p.id)&&!deletedProducts.has(p.id))products.push(p)});
+const bundledAssets={
+ 'rosewood-claw':'rosewood-claw.jpg','mauve-claw':'mauve-claw.jpg','marigold-barrette':'marigold-barrette.jpg','pearl-headband':'pearl-headband.jpg',
+ 'petal-clip':'petal-clip.jpg','ribbon-scrunchie':'ribbon-scrunchie.jpg','cloud-scrunchie':'cloud-scrunchie.jpg','sunday-headband':'sunday-headband.jpg'
+};
+products.forEach(p=>{if(bundledAssets[p.id]){p.asset=bundledAssets[p.id];p.sprite=null}});
 let bag=read('bag',[]).filter(x=>products.some(p=>p.id===x.id)),user=read('user',null),addresses=read('addresses',[]),orders=read('orders',[]),wishlist=read('wishlist',[]).filter(id=>products.some(p=>p.id===id)),pendingProduct=null,pendingQty=1,activeFilter='All',searchText='';
 const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)],money=n=>'₹'+Number(n).toLocaleString('en-IN');
 function toast(message){const el=$('#toast');el.textContent=message;el.classList.add('show');clearTimeout(toast.timer);toast.timer=setTimeout(()=>el.classList.remove('show'),2600)}
