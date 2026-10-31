@@ -6,10 +6,15 @@ on:
       - "backend/**"
       - ".github/workflows/backend-ci.yml"
   push:
-    branches: [main]
+    branches:
+      - main
+      - fix/postgres-persistent-sessions
     paths:
       - "backend/**"
       - ".github/workflows/backend-ci.yml"
+
+permissions:
+  contents: write
 
 jobs:
   test:
@@ -19,10 +24,28 @@ jobs:
         working-directory: backend
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
       - uses: actions/setup-node@v4
         with:
           node-version: 22
       - name: Install ODBC development headers
         run: sudo apt-get update && sudo apt-get install -y unixodbc-dev
-      - run: npm install
-      - run: npm test
+      - name: Regenerate npm lockfile
+        run: npm install --package-lock-only --ignore-scripts
+      - name: Verify reproducible installation
+        run: npm ci --ignore-scripts
+      - name: Check PostgreSQL API syntax
+        run: node --check src/postgres-server.js
+      - name: Run backend tests
+        run: npm test
+      - name: Commit regenerated lockfile
+        working-directory: .
+        run: |
+          if ! git diff --quiet -- backend/package-lock.json; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add backend/package-lock.json
+            git commit -m "Regenerate backend npm lockfile"
+            git push origin HEAD:${{ github.ref_name }}
+          fi
