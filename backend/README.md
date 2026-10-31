@@ -6,7 +6,7 @@ Node.js 20+ / Express API foundation for the Clivelle website and Capacitor app.
 
 1. Install Node.js 20 or newer.
 2. From this folder run `npm install`.
-3. Copy `.env.example` to `.env` and fill in your development SQL Server details.
+3. Copy `.env.example` to `.env`. For a local Windows SQL Server, use `DB_AUTH=windows`, `DB_SERVER=localhost`, and `DB_NAME=Clivelle`; the API uses your Windows account. For SQL authentication, set `DB_AUTH=sql` and provide `DB_USER` / `DB_PASSWORD`.
 4. Start the API with `npm run dev`.
 
 The API listens on `http://localhost:4000` by default.
