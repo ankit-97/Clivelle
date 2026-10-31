@@ -137,7 +137,7 @@ try {
   assert.equal(await appPage.locator('.product-card .clv-photo-crop').count(), 8, 'installed app uses photo crops for all products');
   const appAtlas = await appPage.request.get('http://127.0.0.1:4173/clivelle-photo-grid.svg');
   assert.equal(appAtlas.status(), 200, 'installed app packages the same photo atlas');
-  assert.match(await appPage.locator('.hero-image').evaluate(el => getComputedStyle(el).backgroundImage), /clivelle-hero-launch\.jpg/, 'installed app displays the same hero photo');
+  assert.match(await appPage.locator('.hero-image').evaluate(el => getComputedStyle(el).backgroundImage), /images\.pexels\.com\/photos\/19879697/, 'installed app displays the same hero photo');
   assert.equal(await appPage.locator('.mobile-tabbar').evaluate(el => getComputedStyle(el).position), 'fixed', 'mobile app has fixed bottom navigation');
   const appLayout = await appPage.locator('.hero, .category-ribbon, .product-grid, .feature-grid').evaluateAll(els => els.map(el => ({display:getComputedStyle(el).display,columns:getComputedStyle(el).gridTemplateColumns,flexDirection:getComputedStyle(el).flexDirection})));
   const mobileContext = await browser.newContext({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true });
