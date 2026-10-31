@@ -132,7 +132,8 @@ try {
   await address.locator('[name=pin]').fill('110067');
   await address.locator('button').click();
   await page.locator('#placeOrder').click();
-  assert.equal(await page.locator('#confirmationModal.open').count(), 1, 'demo order confirmation appears');
+  await page.locator('#confirmationModal.open').waitFor({ timeout: 10000 });
+  assert.equal(await page.locator('#confirmationModal.open').count(), 1, 'order confirmation appears after API response');
   assert.ok(Number(await page.locator('#rewardPoints').innerText()) > 0, 'rewards points credited after demo order');
   await page.locator('#confirmationModal [data-close]').click();
   await page.setViewportSize({ width: 390, height: 844 });
