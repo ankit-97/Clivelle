@@ -2,7 +2,7 @@ import { Router } from 'express';
 import crypto from 'node:crypto';
 import { z } from 'zod';
 import { config } from '../config.js';
-import sql from 'mssql/msnodesqlv8.js';
+import sql from 'mssql';
 import bcrypt from 'bcryptjs';
 import { getPool } from '../database.js';
 
