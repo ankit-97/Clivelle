@@ -10,7 +10,8 @@
   "scripts": {
     "dev": "node --watch src/server.js",
     "start": "node src/start.js",
-    "test": "node --test"
+    "test": "node --test",
+    "render:build": "npm install --omit=optional"
   },
   "dependencies": {
     "cors": "^2.8.5",
