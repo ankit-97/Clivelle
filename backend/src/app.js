@@ -4,6 +4,7 @@ import helmet from 'helmet';
 import rateLimit from 'express-rate-limit';
 import { config } from './config.js';
 import { checkDatabase, isDatabaseConfigured } from './database.js';
+import { catalogRouter } from './routes/catalog.js';
 
 export const app = express();
 app.disable('x-powered-by');
@@ -41,6 +42,8 @@ app.get('/health/ready', async (_req, res) => {
     return res.status(503).json({ status: 'not_ready', database: 'unavailable' });
   }
 });
+
+app.use(config.API_BASE_PATH, catalogRouter);
 
 app.get(config.API_BASE_PATH, (_req, res) => {
   res.json({
