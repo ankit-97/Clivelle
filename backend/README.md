@@ -16,6 +16,8 @@ The API listens on `http://localhost:4000` by default.
 - `GET /health/live` — process liveness; does not require the database.
 - `GET /health/ready` — readiness check; runs `SELECT 1` against SQL Server.
 - `GET /api/v1` — API version and foundation status.
+- `GET /api/v1/categories` — active product categories.
+- `GET /api/v1/products` — active products with category, available stock and primary image. Supports `page`, `limit`, `category`, `search` and `featured` filters.
 
 ## Security baseline
 
