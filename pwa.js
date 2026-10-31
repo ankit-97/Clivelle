@@ -1,7 +1,8 @@
 (() => {
   // The storefront keeps installation instructions out of the shopping UI.
   // Users can still install from the browser's native Share / Install menu.
-  if ("serviceWorker" in navigator && location.protocol === "https:") {
+  const isSecureOrigin = location.protocol === "https:" || location.hostname === "localhost" || location.hostname === "127.0.0.1";
+  if ("serviceWorker" in navigator && isSecureOrigin) {
     window.addEventListener("load", () => {
       navigator.serviceWorker.register(new URL("./service-worker.js", location.href), {
         scope: new URL("./", location.href).pathname
