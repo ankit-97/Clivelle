@@ -1,4 +1,4 @@
-const CACHE_NAME = "clivelle-pwa-v19";
+const CACHE_NAME = "clivelle-pwa-v20";
 const BASE_URL = new URL("./", self.location.href);
 const APP_SHELL = [
   "",
