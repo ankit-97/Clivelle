@@ -1,4 +1,4 @@
-import sql from 'mssql/msnodesqlv8';
+import sql from 'mssql/msnodesqlv8.js';
 import { config } from './config.js';
 
 let poolPromise;
