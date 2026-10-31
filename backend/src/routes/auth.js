@@ -17,9 +17,9 @@ const signupSchema = z.object({
 const signinSchema = z.object({ identifier: z.string().trim().min(3).max(254), password: z.string().min(8).max(128) });
 const hashToken = token => crypto.createHash('sha256').update(token).digest();
 const phoneNumber = value => {
-  const digits = String(value || '').replace(/\\D/g, '');
+  const digits = String(value || '').replace(/\D/g, '');
   const national = digits.length === 12 && digits.startsWith('91') ? digits.slice(2) : digits;
-  return /^[6-9]\\d{9}$/.test(national) ? '+91' + national : null;
+  return /^[6-9]\d{9}$/.test(national) ? '+91' + national : null;
 };
 const publicUser = row => ({ id: row.user_id, fullName: row.full_name, email: row.email, phone: row.phone_e164 });
 function setSessionCookie(res, token) {
