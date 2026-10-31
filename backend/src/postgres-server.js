@@ -67,6 +67,18 @@ CREATE TABLE IF NOT EXISTS orders (
 
 async function init() {
  await pool.query(schema);
+ // Migrate any cart table created by an intermediate UUID-product build to stable product slugs.
+ await pool.query(\`DO $ BEGIN
+  IF EXISTS (SELECT 1 FROM information_schema.columns WHERE table_schema=current_schema() AND table_name='cart_items' AND column_name='product_id') THEN
+   ALTER TABLE cart_items ADD COLUMN IF NOT EXISTS product_slug text;
+   UPDATE cart_items ci SET product_slug=p.slug FROM products p WHERE ci.product_slug IS NULL AND p.product_id::text=ci.product_id::text;
+   ALTER TABLE cart_items ALTER COLUMN product_slug SET NOT NULL;
+   ALTER TABLE cart_items DROP CONSTRAINT IF EXISTS cart_items_pkey;
+   ALTER TABLE cart_items DROP COLUMN product_id;
+   ALTER TABLE cart_items ADD PRIMARY KEY(cart_id,product_slug);
+   ALTER TABLE cart_items ADD CONSTRAINT cart_items_product_slug_fkey FOREIGN KEY(product_slug) REFERENCES products(slug);
+  END IF;
+ END $;\`);
  // Upgrade the earlier lightweight PostgreSQL schema in place without dropping customer or catalogue data.
  await pool.query(`ALTER TABLE users ADD COLUMN IF NOT EXISTS account_status text NOT NULL DEFAULT 'active';
  ALTER TABLE users ALTER COLUMN user_id SET DEFAULT gen_random_uuid();
