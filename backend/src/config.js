@@ -4,7 +4,7 @@ import { z } from 'zod';
 const schema = z.object({
   NODE_ENV: z.enum(['development', 'test', 'production']).default('development'),
   PORT: z.coerce.number().int().min(1).max(65535).default(4000),
-  API_BASE_PATH: z.string().regex(/^\\/[a-zA-Z0-9/_-]+$/).default('/api/v1'),
+  API_BASE_PATH: z.string().regex(/^\/[a-zA-Z0-9/_-]+$/).default('/api/v1'),
   CORS_ORIGINS: z.string().default('http://localhost:3000,http://localhost:5173,http://127.0.0.1:5500'),
   TRUST_PROXY: z.enum(['0', '1']).default('0'),
   DB_SERVER: z.string().optional(),
