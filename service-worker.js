@@ -1,4 +1,4 @@
-const CACHE_NAME = "clivelle-pwa-v14";
+const CACHE_NAME = "clivelle-pwa-v15";
 const BASE_URL = new URL("./", self.location.href);
 const APP_SHELL = [
   "",
@@ -10,7 +10,7 @@ const APP_SHELL = [
   "clivelle-icon.svg",
   "clivelle-home-icon-v9.png?rev=10",
   "clivelle-logo.svg",
-  "clivelle-photo-grid.jpg",
+  "clivelle-photo-grid.svg",
   "clivelle-hero-launch.jpg",
   "hero-editorial.svg",
   "story-editorial.svg",
