@@ -8,7 +8,7 @@ const products=[
 {id:'cloud-scrunchie',name:'Cloud Soft Scrunchie',category:'Scrunchies',price:129,mrp:199,color:'Ivory',badge:'EVERYDAY ESSENTIAL',rating:'4.8',asset:'cloud-scrunchie.jpg'},
 {id:'sunday-headband',name:'Sunday Comfort Headband',category:'Hairbands',price:269,mrp:399,color:'Blush',badge:'NEW COLOUR',rating:'4.9',asset:'sunday-headband.jpg'}
 ];
-const API_BASE_URL=String(window.CLIVELLE_API_BASE_URL||(window.location.hostname==='localhost'||window.location.hostname==='127.0.0.1'?`${window.location.protocol}//${window.location.hostname}:4000/api/v1`:'/api/v1')).replace(/\/+$/,'');
+const API_BASE_URL=String(window.CLIVELLE_API_BASE_URL||(window.location.hostname==='localhost'||window.location.hostname==='127.0.0.1'?`${window.location.protocol}//${window.location.hostname}:4000/api/v1`:'https://clivelle.onrender.com/api/v1')).replace(/\/+$/,'');
 const escapeHtml=value=>String(value??'').replace(/[&<>"']/g,char=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
 function catalogImage(value){try{const url=new URL(value,window.location.href);if(url.origin===window.location.origin)return escapeHtml(url.pathname+url.search);return ['https:','http:'].includes(url.protocol)?escapeHtml(url.href):''}catch{return ''}}
 function renderCategoryFilters(categories){const row=$('#filterRow'),values=['All',...new Set(categories.filter(Boolean))];row.replaceChildren(...values.map(value=>{const button=document.createElement('button');button.type='button';button.className='filter-chip';button.dataset.filter=value;button.textContent=value==='All'?'All':value;button.classList.toggle('active',value===activeFilter);return button}))}
