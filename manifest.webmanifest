@@ -16,13 +16,13 @@
   ],
   "icons": [
     {
-      "src": "./clivelle-home-icon-v9.png?rev=10",
+      "src": "./clivelle-app-icon-v10.png?rev=11",
       "sizes": "180x180",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "./clivelle-icon.svg?v=10",
+      "src": "./clivelle-icon.svg?v=11",
       "sizes": "any",
       "type": "image/svg+xml",
       "purpose": "any"
