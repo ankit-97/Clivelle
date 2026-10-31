@@ -20,6 +20,10 @@ The API listens on `http://localhost:4000` by default.
 - `GET /api/v1` — API version and foundation status.
 - `GET /api/v1/categories` — active product categories.
 - `GET /api/v1/products` — active products with category, available stock and primary image. Supports `page`, `limit`, `category`, `search` and `featured` filters.
+- `POST /api/v1/auth/otp/request` — sends an SMS OTP through Twilio Verify or an email OTP through SendGrid when configured.
+- `POST /api/v1/auth/otp/verify` — verifies a six-digit OTP without logging the code.
+
+OTP delivery is provider-backed and opt-in. Set the `OTP_TWILIO_*` variables for phone OTP, the `OTP_SENDGRID_API_KEY` and `OTP_EMAIL_FROM` variables for email OTP, or both. Requests return `OTP_PROVIDER_NOT_CONFIGURED` until the relevant variables are present. Twilio trial accounts can only send to verified recipient numbers; SendGrid requires a verified sender identity.
 
 ## Security baseline
 
@@ -30,8 +34,8 @@ The API listens on `http://localhost:4000` by default.
 
 ## Not implemented yet
 
-Customer OTP delivery/verification, access-token/session issuance, cart/order workflows, payment gateway webhooks, shipping integrations and admin authorization are not live yet. These must be implemented and tested before taking real customer orders.
+Access-token/session issuance, cart/order workflows, payment gateway webhooks, shipping integrations and admin authorization are not live yet. These must be implemented and tested before taking real customer orders.
 
 ## Database
 
-The SQL Server schema is maintained in the separate [Clivelle-Database repository](https://github.com/ankit-97/Clivelle-Database). Apply and validate its migration on a fresh development database before connecting production traffic. At the currently referenced revision, that repository contains only a README and no migration files, so the catalog SQL cannot yet be validated against the schema or a real database.
+The SQL Server schema is maintained in the separate [Clivelle-Database repository](https://github.com/ankit-97/Clivelle-Database). Apply and validate its migration on a fresh development database before connecting production traffic.

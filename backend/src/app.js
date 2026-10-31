@@ -5,6 +5,7 @@ import rateLimit from 'express-rate-limit';
 import { config } from './config.js';
 import { checkDatabase, isDatabaseConfigured } from './database.js';
 import { catalogRouter } from './routes/catalog.js';
+import { authRouter } from './routes/auth.js';
 
 export const app = express();
 app.disable('x-powered-by');
@@ -44,6 +45,7 @@ app.get('/health/ready', async (_req, res) => {
 });
 
 app.use(config.API_BASE_PATH, catalogRouter);
+app.use(`${config.API_BASE_PATH}/auth`, authRouter);
 
 app.get(config.API_BASE_PATH, (_req, res) => {
   res.json({
@@ -73,6 +75,9 @@ app.use((error, _req, res, _next) => {
   }
   if (error.apiCode === 'DATABASE_UNAVAILABLE') {
     return res.status(503).json({ error: { code: error.apiCode, message: 'The catalog is temporarily unavailable.' } });
+  }
+  if (error.apiCode === 'OTP_PROVIDER_NOT_CONFIGURED' || error.apiCode === 'OTP_PROVIDER_ERROR') {
+    return res.status(error.statusCode || 503).json({ error: { code: error.apiCode, message: error.message } });
   }
   console.error('Unhandled API error:', error);
   return res.status(500).json({ error: { code: 'INTERNAL_ERROR', message: 'Something went wrong.' } });

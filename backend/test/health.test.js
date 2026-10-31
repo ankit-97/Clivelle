@@ -61,3 +61,11 @@ test('CORS rejects unconfigured browser origins', async () => {
   assert.equal(response.status, 403);
   assert.equal(response.body.error.code, 'ORIGIN_NOT_ALLOWED');
 });
+
+test('OTP request validates input and reports missing providers safely', async () => {
+  const invalid = await request(server).post('/api/v1/auth/otp/request').send({ channel: 'sms', destination: 'bad' });
+  assert.equal(invalid.status, 400);
+  const unavailable = await request(server).post('/api/v1/auth/otp/request').send({ channel: 'email', destination: 'tester@example.com' });
+  assert.equal(unavailable.status, 503);
+  assert.equal(unavailable.body.error.code, 'OTP_PROVIDER_NOT_CONFIGURED');
+});
