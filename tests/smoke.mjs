@@ -116,6 +116,7 @@ try {
   await page.locator('#reviewForm input[name=name]').fill('A Tester');
   await page.locator('#reviewForm textarea[name=message]').fill('Lovely quality and colour.');
   await page.locator('#reviewForm button').click();
+  await page.waitForFunction(() => /submitted for moderation/i.test(document.querySelector('#toast')?.textContent || ''), { timeout: 5000 });
   assert.match(await page.locator('#toast').innerText(), /submitted for moderation/i, 'review is saved on the server for moderation');
 
   // Checkout, address validation, demo order and rewards
