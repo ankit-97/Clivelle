@@ -86,7 +86,7 @@ body{background:#fff9f8;color:#111a45}
 .product-name,.product-title-button{color:#111a45}
 .product-rating{color:#ff9b36}
 .story-band{background:#f3ecff}
-.story-photo{background-image:url('./story-editorial.svg')!important}
+.story-photo{background-image:url('https://images.pexels.com/photos/19879697/pexels-photo-19879697.jpeg?auto=compress&cs=tinysrgb&w=1600')!important;background-position:center 42%!important;background-size:cover!important;}
 .newsletter{background:linear-gradient(135deg,#fff1f6,#f1eaff)}
 .newsletter form input{border-radius:999px 0 0 999px;background:#fff}
 .newsletter .button{border-radius:0 999px 999px 0}
@@ -359,7 +359,7 @@ body{font-family:'Poppins','DM Sans',sans-serif;color:var(--clv-ink);background:
 /* Clivelle launch storefront — photographic merchandising, aligned to the approved reference */
 .clv-atlas-photo,.clv-photo-crop{
  display:block;
- background-image:url('./clivelle-photo-grid.jpg');
+ background-image:url('./clivelle-photo-grid.svg');
  background-size:300% 400%;
  background-position:var(--photo-x,0%) var(--photo-y,0%);
  background-repeat:no-repeat;
@@ -378,7 +378,7 @@ body{font-family:'Poppins','DM Sans',sans-serif;color:var(--clv-ink);background:
  grid-column:1/3;grid-row:1;
  position:relative;min-height:0;height:100%;
  border-radius:17px;overflow:hidden;
- background:#ffe5ef url('./clivelle-hero-launch.jpg') 58% 42%/cover no-repeat!important;
+ background:#ffe5ef url('https://images.pexels.com/photos/19879697/pexels-photo-19879697.jpeg?auto=compress&cs=tinysrgb&w=1800') 58% 42%/cover no-repeat!important;
 }
 .hero-image:before{display:none!important;content:none!important;background:none!important}
 .hero-image:after{
