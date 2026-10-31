@@ -1,8 +1,10 @@
-// Render production must always use the PostgreSQL server. Do not silently
-// fall back to the SQL Server implementation when DATABASE_URL is missing:
-// that path can require the native msnodesqlv8/ODBC driver, which is not part
-// of the PostgreSQL deployment. postgres-server.js reports the missing URL.
-if (process.env.NODE_ENV === 'production' || process.env.DATABASE_URL) {
+// Render deployments use PostgreSQL. Never fall back to the SQL Server
+// implementation on Render: that path may require the native msnodesqlv8
+// driver, which is intentionally omitted from the Render production install.
+const isRender = Boolean(process.env.RENDER_SERVICE_ID);
+const isProduction = process.env.NODE_ENV === 'production';
+
+if (isRender || isProduction || process.env.DATABASE_URL) {
   await import('./postgres-server.js');
 } else {
   await import('./server.js');
