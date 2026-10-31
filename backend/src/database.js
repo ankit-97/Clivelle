@@ -1,5 +1,10 @@
-import sql from 'mssql/msnodesqlv8.js';
 import { config } from './config.js';
+
+// Use the pure-JavaScript Tedious driver for SQL authentication. The native
+// msnodesqlv8/ODBC driver is loaded only for the optional Windows-auth path.
+const sql = config.DB_AUTH === 'windows'
+  ? (await import('mssql/msnodesqlv8.js')).default
+  : (await import('mssql')).default;
 
 let poolPromise;
 
