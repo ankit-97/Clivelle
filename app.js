@@ -105,6 +105,6 @@ const originalRenderAccount=renderAccount;renderAccount=function(){originalRende
 const originalPlaceOrder=$('#placeOrder').onclick;
 $('#placeOrder').addEventListener('click',()=>{});
 
-renderProducts();renderBag();renderBundleChoices();renderReviews();renderRewards();void loadApiCatalog();
+renderProducts();renderBag();renderBundleChoices();renderReviews();renderRewards();void loadApiCatalog().then(()=>{products.forEach(p=>{if(bundledAssets[p.id]){p.asset=bundledAssets[p.id];p.sprite=null}});renderProducts();renderBundleChoices()});
 
 
