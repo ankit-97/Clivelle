@@ -11,7 +11,7 @@ const app = express();
 app.disable('x-powered-by');
 if (process.env.TRUST_PROXY === '1') app.set('trust proxy', 1);
 app.use(helmet());
-const origins = (process.env.CORS_ORIGINS || 'https://ankit-97.github.io,https://clivelle.onrender.com,http://localhost:4173,http://127.0.0.1:4173,http://localhost:5500').split(',').map(x => x.trim()).filter(Boolean);
+const origins = (process.env.CORS_ORIGINS || 'https://ankit-97.github.io,https://clivelle.onrender.com,capacitor://localhost,http://localhost,http://localhost:4173,http://127.0.0.1:4173,http://localhost:5500').split(',').map(x => x.trim()).filter(Boolean);
 app.use(cors({ origin(origin, cb) { if (!origin || origins.includes(origin)) return cb(null, true); return cb(new Error('Origin is not allowed by CORS')); }, credentials: true, methods: ['GET','POST','PUT','PATCH','DELETE','OPTIONS'], allowedHeaders: ['Content-Type','Authorization','Idempotency-Key'] }));
 app.use(express.json({ limit: '1mb' }));
 app.use(rateLimit({ windowMs: 15 * 60 * 1000, limit: 300, standardHeaders: true, legacyHeaders: false }));
