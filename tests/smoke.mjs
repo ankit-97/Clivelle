@@ -81,7 +81,8 @@ try {
   // Colour finder (this previously crashed due to treating querySelector as a list)
   await page.locator('#colourFinder button[data-colour="Pearl"]').click();
   assert.match(await page.locator('#colourStatus').innerText(), /Pearl/i);
-  assert.ok(await page.locator('.product-card').count() >= 1, 'colour filter returns matching items');
+  await page.waitForFunction(() => document.querySelectorAll('.product-card:not([hidden])').length >= 1);
+  assert.ok(await page.locator('.product-card:not([hidden])').count() >= 1, 'colour filter returns visible matching items');
 
   // Bundle builder, account demo sign-in and bag total
   await page.locator('#colourFinder button[data-colour="All"]').click();
