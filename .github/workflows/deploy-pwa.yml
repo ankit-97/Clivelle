@@ -9,6 +9,7 @@ on:
       - 'app.js'
       - '*.svg'
       - '*.png'
+      - '*.jpg'
       - 'manifest.webmanifest'
       - 'service-worker.js'
       - 'pwa.js'
