@@ -44,12 +44,12 @@ Checkout currently supports **Cash on Delivery only** on the SQL Server API. COD
 
 ## Local setup
 
-1. Install Node.js 20 or newer and SQL Server ODBC Driver 18.
-2. Copy `.env.example` to `.env`; keep `DB_AUTH=windows`, set `DB_SERVER` and `DB_NAME=Clivelle` to your local instance.
-3. Run the schema migration and development seed scripts from the [Clivelle-Database repository](https://github.com/ankit-97/Clivelle-Database) against the `Clivelle` database.
-4. From this folder run `npm install`, then `npm run dev` (watch mode) or `npm start`.
-5. Verify `GET http://localhost:4000/health/ready` returns `{\"status\":\"ready\",\"database\":\"connected\"}`.
-6. Open the storefront locally and confirm `window.CLIVELLE_API_BASE_URL` points to `http://localhost:4000/api/v1`. For another API host, define it before loading `app.js`.
+1. Install Node.js 20 or newer, SQL Server 2019, SQL Server ODBC Driver 18 and the `sqlcmd` utility.
+2. Clone `Clivelle` and `Clivelle-Database` into sibling folders.
+3. From PowerShell at the Clivelle repository root, run `powershell -ExecutionPolicy Bypass -File .\scripts\start-local.ps1`. The script creates the `Clivelle` database if needed, applies the 26-table migration, seeds the four categories plus eight development products and inventory, installs dependencies, and starts the local SQL Server API with Windows Authentication.
+4. Verify `GET http://localhost:4000/health/ready` returns `{"status":"ready","database":"connected"}`.
+5. Open `http://127.0.0.1:4173`; the local storefront automatically uses `http://127.0.0.1:4000/api/v1`.
+6. If your SQL Server is a named instance, pass it explicitly: `-SqlServer 'localhost\SQLEXPRESS'`.
 
 The SQL Server fallback still uses the SQL Server schema in the separate [Clivelle-Database repository](https://github.com/ankit-97/Clivelle-Database). The PostgreSQL production path uses the schema in `src/postgres-server.js`.
 
