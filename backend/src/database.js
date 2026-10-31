@@ -16,7 +16,7 @@ export async function getPool() {
       ? {
           server: config.DB_SERVER,
           database: config.DB_NAME,
-          driver: 'msnodesqlv8',
+          driver: 'ODBC Driver 18 for SQL Server',
           options: {
             trustedConnection: true,
             trustServerCertificate: config.DB_TRUST_SERVER_CERTIFICATE === 'true'
