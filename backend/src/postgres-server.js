@@ -68,10 +68,10 @@ CREATE TABLE IF NOT EXISTS orders (
 async function init() {
  await pool.query(schema);
  // Upgrade the earlier lightweight PostgreSQL schema in place without dropping customer or catalogue data.
- await pool.query(\`ALTER TABLE users ADD COLUMN IF NOT EXISTS account_status text NOT NULL DEFAULT 'active';
+ await pool.query(`ALTER TABLE users ADD COLUMN IF NOT EXISTS account_status text NOT NULL DEFAULT 'active';
  ALTER TABLE products ADD COLUMN IF NOT EXISTS description text;
  ALTER TABLE products ADD COLUMN IF NOT EXISTS is_featured boolean NOT NULL DEFAULT false;
- ALTER TABLE products ADD COLUMN IF NOT EXISTS active boolean NOT NULL DEFAULT true;\`);
+ ALTER TABLE products ADD COLUMN IF NOT EXISTS active boolean NOT NULL DEFAULT true;`);
  const count = await pool.query('SELECT count(*)::int AS n FROM products');
  if (!count.rows[0].n) {
   await pool.query(`INSERT INTO products(slug,name,category,price,compare_at_price,colour,image,is_featured) VALUES
