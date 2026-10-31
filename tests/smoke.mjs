@@ -89,6 +89,7 @@ try {
   await page.locator('#bundleChoices input').nth(1).check();
   assert.match(await page.locator('#bundleTotal').innerText(), /10% off/i);
   await page.locator('#addBundle').click();
+  await page.locator('[data-auth-mode="signup"]').click();
   await page.locator('#authName').fill('Clivelle Tester');
   await page.locator('#authPhone').fill('9876543210');
   await page.locator('#signupPassword').fill('ClivelleTest123!');
