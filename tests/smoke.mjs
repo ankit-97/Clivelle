@@ -26,7 +26,7 @@ try {
   assert.equal(await page.locator('.product-card .clv-photo-crop').count(), 8, 'all eight catalogue products have photo crops');
   const photoAtlas = await page.request.get('http://127.0.0.1:4173/clivelle-photo-grid.jpg');
   assert.equal(photoAtlas.status(), 200, 'catalogue product photo atlas is served');
-  assert.match(photoAtlas.headers()['content-type'] || '', /image\/svg\+xml/i, 'catalogue photo atlas is an SVG');
+  assert.match(photoAtlas.headers()['content-type'] || '', /image\/jpeg/i, 'catalogue photo atlas is a JPEG');
   assert.match(await page.locator('.hero-image').evaluate(el => getComputedStyle(el).backgroundImage), /images\.pexels\.com\/photos\/19879697/, 'hero displays the sharp editorial photo');
   assert.ok(await page.locator('.site-header .brand-logo').isVisible(), 'website brand logo renders');
   assert.ok(await page.locator('.announcement').isVisible(), 'website storefront header remains visible');
@@ -149,7 +149,7 @@ try {
   const promoRects = await appPage.locator('.hero-promos .hero-promo').evaluateAll(els => els.map(el => { const r=el.getBoundingClientRect(); return {x:r.x,y:r.y,width:r.width}; }));
   assert.ok(promoRects.every(r => Math.abs(r.y-promoRects[0].y)<2), 'all three mobile promo cards sit on one row');
   assert.ok(promoRects[0].x < promoRects[1].x && promoRects[1].x < promoRects[2].x, 'mobile promo cards follow the reference order');
-  const icon = await appPage.request.get('http://127.0.0.1:4173/clivelle-home-icon-v9.png?rev=10');
+  const icon = await appPage.request.get('http://127.0.0.1:4173/clivelle-app-icon-v10.png?rev=11');
   assert.equal(icon.status(), 200, 'unique iOS home-screen icon is served');
   assert.match(icon.headers()['content-type'] || '', /image\/png/i, 'home-screen icon is a PNG');
   assert.deepEqual(errors, [], 'no uncaught JavaScript errors in installed app shell');
@@ -162,11 +162,11 @@ try {
   for (let attempt = 0; attempt < 18; attempt++) {
     liveHome = await livePage.request.get('https://ankit-97.github.io/Clivelle/');
     liveHtml = await liveHome.text().catch(() => '');
-    if (liveHome.status() === 200 && liveHtml.includes('clivelle-home-icon-v9.png')) break;
+    if (liveHome.status() === 200 && liveHtml.includes('clivelle-app-icon-v10.png')) break;
     await new Promise(resolve => setTimeout(resolve, 5000));
   }
   assert.equal(liveHome.status(), 200, 'published website responds');
-  assert.ok(liveHtml.includes('clivelle-home-icon-v9.png?rev=10'), 'published page references the cache-busted iOS icon URL');
+  assert.ok(liveHtml.includes('clivelle-app-icon-v10.png?rev=11'), 'published page references the cache-busted app icon URL');
   const liveAtlas = await livePage.request.get('https://ankit-97.github.io/Clivelle/clivelle-photo-grid.jpg');
   assert.equal(liveAtlas.status(), 200, 'published catalogue photo atlas responds');
   const liveHeroPhoto = await livePage.request.get('https://ankit-97.github.io/Clivelle/clivelle-hero-launch.jpg');
@@ -174,12 +174,12 @@ try {
   const liveManifestResponse = await livePage.request.get('https://ankit-97.github.io/Clivelle/manifest.webmanifest');
   assert.equal(liveManifestResponse.status(), 200, 'published web manifest responds');
   const liveManifest = await liveManifestResponse.json();
-  assert.ok(liveManifest.icons.some(icon => icon.src === './clivelle-home-icon-v9.png?rev=10'), 'published manifest points to the cache-busted icon');
-  const liveIcon = await livePage.request.get('https://ankit-97.github.io/Clivelle/clivelle-home-icon-v9.png?rev=10');
-  assert.equal(liveIcon.status(), 200, 'published unique home-screen icon responds');
+  assert.ok(liveManifest.icons.some(icon => icon.src === './clivelle-app-icon-v10.png?rev=11'), 'published manifest points to the cache-busted icon');
+  const liveIcon = await livePage.request.get('https://ankit-97.github.io/Clivelle/clivelle-app-icon-v10.png?rev=11');
+  assert.equal(liveIcon.status(), 200, 'published updated app icon responds');
   assert.ok((liveIcon.headers()['content-type'] || '').includes('image/png'), 'published home-screen icon has PNG content type');
   await liveContext.close();
-  console.log('CLIVELLE SMOKE TESTS PASSED: reference-matched shared website/app layout, six category tiles, image-led hero promos and banners, header search/wishlist, category navigation, product detail, finder, colour filter, bundles, sign-in, bag quantities, gift options, reviews, checkout, rewards and cache-busted PNG icon.');
+  console.log('CLIVELLE SMOKE TESTS PASSED: reference-matched shared website/app layout, six category tiles, image-led hero promos and banners, header search/wishlist, category navigation, product detail, finder, colour filter, bundles, sign-in, bag quantities, gift options, reviews, checkout, rewards and updated cache-busted PNG app icon.');
 } finally {
   await browser.close();
 }
