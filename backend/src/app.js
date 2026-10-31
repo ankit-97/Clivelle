@@ -6,6 +6,7 @@ import { config } from './config.js';
 import { checkDatabase, isDatabaseConfigured } from './database.js';
 import { catalogRouter } from './routes/catalog.js';
 import { authRouter } from './routes/auth.js';
+import { customerRouter } from './routes/customer.js';
 
 export const app = express();
 app.disable('x-powered-by');
@@ -46,6 +47,7 @@ app.get('/health/ready', async (_req, res) => {
 
 app.use(config.API_BASE_PATH, catalogRouter);
 app.use(`${config.API_BASE_PATH}/auth`, authRouter);
+app.use(`${config.API_BASE_PATH}/customer`, customerRouter);
 
 app.get(config.API_BASE_PATH, (_req, res) => {
   res.json({

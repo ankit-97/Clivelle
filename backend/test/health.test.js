@@ -69,3 +69,9 @@ test('OTP request validates input and reports missing providers safely', async (
   assert.equal(unavailable.status, 503);
   assert.equal(unavailable.body.error.code, 'OTP_PROVIDER_NOT_CONFIGURED');
 });
+
+test('customer resources require an authenticated session', async () => {
+  const response = await request(server).get('/api/v1/customer/cart');
+  assert.equal(response.status, 401);
+  assert.equal(response.body.error.code, 'AUTH_REQUIRED');
+});
